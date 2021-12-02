@@ -6,13 +6,15 @@ package main;
  *
  */
 public class Main {
-	
+
     public static void main(String args[]) {
-    	String EXAMPLE_FILE_PATH = "data/aoc_2021_day_1_data_example.txt";
-    	String TASK_FILE_PATH = "data/aoc_2021_day_1_data_task.txt";
-    	
-    	System.out.println("Advent of code 2021 day 1-1 solved: "
-            + IncrementCalculator.countEvery(TASK_FILE_PATH));
-    	System.exit(0);
+        String EXAMPLE_FILE_PATH = "data/aoc_2021_day_1_data_example.txt";
+        String TASK_FILE_PATH = "data/aoc_2021_day_1_data_task.txt";
+
+        System.out.println("Advent of code 2021 day 1-1 solved: "
+            + IncrementCalculator.countEveryOne(TASK_FILE_PATH));
+        System.out.println("Advent of code 2021 day 1-2 solved: "
+            + IncrementCalculator.countEveryThree(TASK_FILE_PATH));
+        System.exit(0);
     }
 }
