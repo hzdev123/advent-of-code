@@ -29,8 +29,8 @@ public class IncrementCalculator {
                 ints.add(Integer.parseInt(line.trim()));
             }
             for (int i = 0; i < ints.size(); i++) {
-            if (i > 1) {
-                int curr = ints.get(i) + ints.get(i-1) + ints.get(i-2);
+                if (i > 1) {
+                    int curr = ints.get(i) + ints.get(i - 1) + ints.get(i - 2);
                     if (prev != -1
                         && curr > prev) {
                         nbrOfIncrease++;
@@ -60,7 +60,7 @@ public class IncrementCalculator {
             while ((line = br.readLine()) != null) {
                 int curr = Integer.parseInt(line.trim());
                 if (prev != -1
-                && curr > prev) {
+                	&& curr > prev) {
                     nbrOfIncrease++;
                 }
                 prev = curr;
