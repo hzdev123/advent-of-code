@@ -1,0 +1,35 @@
+Table of contents
+	1. Introduction
+	2. Project setup
+	3. Future improvements
+
+1. Introduction
+	This folder contains the solutions for the advent of code 2021.
+
+	For each day's solution, see specific sub-folder.
+
+2. Project setup
+
+	The general structure for each day's solution is:
+
+		AoC_2021_Day_[Day_number]
+			Top level folder for the day's challenge
+
+		AoC_2021_Day_[Day_number]/README
+			Contains general info surrounding the challenge and instructions on how to run/test it. Also links to the challenge's github page.
+
+		AoC_2021_Day_[Day_number]/Makefile
+			Contains commands on running or testing the solution.
+				make run - run the solution
+				make test - test the solution
+
+		AoC_2021_Day_[Day_number]/src
+			Contains the source code.
+
+		AoC_2021_Day_[Day_number]/test
+			Contains test cases based on data provided by the challenge.
+
+		AoC_2021_Day_[Day_number]/data
+			Contains .txt files with input data provided by the challenge.
+
+3. Future improvements
