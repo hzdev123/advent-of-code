@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import main.IncrementCalculator;
 
-public class TestAoC2021D11 {
+public class TestAoC2021D1 {
 
 	public static void main(String[] args) throws Exception {
 		System.out.println("Testing advent of code 2021 Day 1");
