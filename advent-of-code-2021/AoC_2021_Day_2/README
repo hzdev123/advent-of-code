@@ -1,0 +1,58 @@
+Table of contents
+
+    1. Task Description
+    2. Summary
+        2.1 Day 2-1
+        2.2 Day 2-2
+    3. Example
+        3.1 Day 2-1
+        3.1 Day 2-2
+    4. Run the program
+    5. Run the tests
+
+1. Task Description
+    https://adventofcode.com/2021/day/2
+
+2. Summary:
+    2.1 Day 2-1
+        Starting at 0,0, calculate the product of the new coordinates after applying the movements input.
+
+        forward:    + horizontal
+        down:       + depth
+        up:         - depth
+
+    2.2 Day 2-1
+        Starting at 0,0, calculate the product of the new coordinates after applying the movements input with aim.
+
+        forward:    + horizontal and depth * aim
+        down:       + aim
+        up:         - aim
+
+3. Example:
+    3.1 Day 2-1
+        forward 5
+        down    5
+        forward 8
+        up      3
+        down    8
+        forward 2
+
+        Ans: 15 * 10 = 150
+
+    3.1 Day 2-2
+        forward 5
+        down    5
+        forward 8
+        up      3
+        down    8
+        forward 2
+
+        Ans: 15 * 60 = 900
+
+4. Run the program
+    cd AoC_2021_Day_2
+    make run
+
+5. Run the tests
+    cd AoC_2021_Day_2
+    make test
