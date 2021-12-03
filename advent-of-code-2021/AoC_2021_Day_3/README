@@ -1,0 +1,41 @@
+Table of contents
+
+    1. Task Description
+    2. Summary
+        2.1 Day 3-1
+    3. Example
+        3.1 Day 3-1
+    4. Run the program
+    5. Run the tests
+
+1. Task Description
+    https://adventofcode.com/2021/day/3
+
+2. Summary:
+    2.1 Day 3-1
+        Given columns of binary digits, calculate the product of the most/least common digit in decimal form.
+
+3. Example:
+    3.1 Day 3-1
+        00100
+        11110
+        10110
+        10111
+        10101
+        01111
+        00111
+        11100
+        10000
+        11001
+        00010
+        01010
+
+        Ans: 10110 * 01001 = 22 * 9 = 198
+
+4. Run the program
+    cd AoC_2021_Day_3
+    make run
+
+5. Run the tests
+    cd AoC_2021_Day_3
+    make test
