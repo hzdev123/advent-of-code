@@ -12,8 +12,9 @@ public class Main {
         String TASK_FILE_PATH = "data/aoc_2021_day_2_data_task.txt";
 
         System.out.println("Advent of code 2021 day 2-1 solved: "
-            + PositionCalculator.getSimpleProduct(TASK_FILE_PATH));
-        System.out.println("Advent of code 2021 day 2-2 solved: ");
+            + PositionCalculator.getProduct(TASK_FILE_PATH));
+        System.out.println("Advent of code 2021 day 2-2 solved: "
+            + PositionCalculator.getAimProduct(TASK_FILE_PATH));
         System.exit(0);
     }
 }
