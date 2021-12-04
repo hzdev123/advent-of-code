@@ -14,29 +14,29 @@ public class TestAoC2021D3 {
 
         testDay31Example(EXAMPLE_FILE_PATH);
         testDay31Task(TASK_FILE_PATH);
-//        testDay32Example(EXAMPLE_FILE_PATH);
-//        testDay32Task(TASK_FILE_PATH);
+        testDay32Example(EXAMPLE_FILE_PATH);
+        testDay32Task(TASK_FILE_PATH);
 
         System.out.println("Testing advent of code 2021 Day 3 done");
     }
 
     @Test
     private static void testDay31Example(String filePath) {
-        assertEquals(198, RateProductCalculator.getRateProduct(filePath));
+        assertEquals(198, RateProductCalculator.getPowerConsumption(filePath));
     }
 
     @Test
     private static void testDay31Task(String filePath) {
-        assertEquals(2583164, RateProductCalculator.getRateProduct(filePath));
+        assertEquals(2583164, RateProductCalculator.getPowerConsumption(filePath));
     }
 
-//    @Test
-//    private static void testDay32Example(String filePath) {
-//        assertEquals(955, RateProductCalculator.getRateProduct(filePath));
-//    }
-//
-//    @Test
-//    private static void testDay32Task(String filePath) {
-//        assertEquals(955, RateProductCalculator.getRateProduct(filePath));
-//    }
+    @Test
+    private static void testDay32Example(String filePath) {
+        assertEquals(230, RateProductCalculator.getLifeSupport(filePath));
+    }
+
+    @Test
+    private static void testDay32Task(String filePath) {
+        assertEquals(955, RateProductCalculator.getLifeSupport(filePath));
+    }
 }

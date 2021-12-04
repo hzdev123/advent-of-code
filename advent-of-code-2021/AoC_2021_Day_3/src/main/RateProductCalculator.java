@@ -19,7 +19,7 @@ public class RateProductCalculator {
      * @param filePath Path to data file.
      * @return the product of the gamma and epsilon rate.
      */
-    public static int getRateProduct(String filePath){
+    public static int getPowerConsumption(String filePath){
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = "";
             ArrayList<String> digits = new ArrayList<String>();
@@ -31,7 +31,7 @@ public class RateProductCalculator {
                     digits.add(lineSplit[i]);
                 }
             }
-            return getRateProduct(digits, digitsLenght);
+            return getEpsilonGammaProduct(digits, digitsLenght);
         } catch (FileNotFoundException e) {
             System.err.println("File not found: " + filePath);
             e.printStackTrace();
@@ -41,7 +41,38 @@ public class RateProductCalculator {
         return -1;
     }
 
-    private static int getRateProduct(ArrayList<String> digits, int sequenceSize) {
+    /**
+     * Get the product of the O2 and CO2 rates.
+     * @param filePath Path to data file.
+     * @return the product of the O2 and CO2 rates.
+     */
+    public static int getLifeSupport(String filePath){
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line = "";
+            ArrayList<String> digits = new ArrayList<String>();
+            int digitsLenght = 0;
+            while ((line = br.readLine()) != null) {
+                String[] lineSplit = line.split("");
+                digitsLenght = lineSplit.length;
+                for (int i = 0; i < digitsLenght; i++) {
+                    digits.add(lineSplit[i]);
+                }
+            }
+            return getO2CO2Product(digits, digitsLenght);
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found: " + filePath);
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    private static int getO2CO2Product(ArrayList<String> digits, int sequenceSize) {
+        return 0;
+    }
+
+    private static int getEpsilonGammaProduct(ArrayList<String> digits, int sequenceSize) {
         StringBuilder gammaRate = new StringBuilder();
         for (int i = 0; i < sequenceSize; i++) {
             int zero = 0;
