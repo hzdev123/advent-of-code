@@ -13,6 +13,11 @@ public class Main {
 
         System.out.println("Advent of code 2021 day 3-1 solved: "
             + RateProductCalculator.getPowerConsumption(TASK_FILE_PATH));
+
+//      Current solution does not solve TASK_FILE_PATH. Only solves EXAMPLE_FILE_PATH
+//        O2: 585
+//        CO2: 3375
+//        1974375 too low
         System.out.println("Advent of code 2021 day 3-2 solved: "
             + RateProductCalculator.getLifeSupport(TASK_FILE_PATH));
         System.exit(0);
