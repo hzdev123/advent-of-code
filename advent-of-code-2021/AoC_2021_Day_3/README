@@ -1,0 +1,211 @@
+Table of contents
+
+    1. Task Description
+    2. Summary
+        2.1 Day 3-1
+        2.1 Day 3-2
+    3. Example
+        3.1 Day 3-1
+        3.1 Day 3-2
+    4. Run the program
+    5. Run the tests
+
+1. Task Description
+    https://adventofcode.com/2021/day/3
+
+2. Summary:
+    2.1 Day 3-1
+        Given a columns of binary digits, calculate the product
+        of the epsilon and gamma rate in decimal form.
+
+    2.2 Day 3-2
+        Given a columns of binary digits, calculate the product
+        of the O2 generator rate and CO2 scrubber rate in decimal form.
+
+3. Example:
+    3.1 Day 3-1
+        Finding gamma rate - take the most common bit
+            i marks current bit
+
+            1st bit
+                i
+                00100
+                11110
+                10110
+                10111
+                10101
+                01111
+                00111
+                11100
+                10000
+                11001
+                00010
+                01010
+                -----
+                1
+
+            2nd bit
+                 i
+                00100
+                11110
+                10110
+                10111
+                10101
+                01111
+                00111
+                11100
+                10000
+                11001
+                00010
+                01010
+                -----
+                10
+
+            3rd bit
+                  i
+                00100
+                11110
+                10110
+                10111
+                10101
+                01111
+                00111
+                11100
+                10000
+                11001
+                00010
+                01010
+                -----
+                101
+
+            4th bit
+                   i
+                00100
+                11110
+                10110
+                10111
+                10101
+                01111
+                00111
+                11100
+                10000
+                11001
+                00010
+                01010
+                -----
+                1011
+
+            5th bit
+                    i
+                00100
+                11110
+                10110
+                10111
+                10101
+                01111
+                00111
+                11100
+                10000
+                11001
+                00010
+                01010
+                -----
+                10110
+
+                gamma rate:
+                    10110
+
+        Finding epsilon rate - take the least common bit
+            Find the inverse of gamma rate:
+                Inverse of
+                    10110
+                becomes
+                    01001
+
+        Ans: 10110 * 01001 = 22 * 9 = 198
+
+    3.2 Day 3-2
+        Finding O2 generator rate - majority bits
+            i marks current bit
+
+            1st bit
+                i
+                00100
+                11110
+                10110
+                10111
+                10101
+                01111
+                00111
+                11100
+                10000
+                11001
+                00010
+                01010
+
+            2nd bit
+                 i
+                11110
+                10110
+                10111
+                10101
+                11100
+                10000
+                11001
+
+            3rd bit
+                  i
+                10110
+                10111
+                10101
+                10000
+
+            4th bit
+                   i
+                10110
+                10111
+                10101
+
+            5th bit
+                    i
+                10110
+                10111
+
+            O2 generator rate
+                10111
+
+        Finding CO2 scrubber rate - minority bits
+            i marks current bit
+
+            1st bit
+                i
+                00100
+                11110
+                10110
+                10111
+                10101
+                01111
+                00111
+                11100
+                10000
+                11001
+                00010
+                01010
+
+            2nd bit
+                 i
+                01111
+                01010
+
+            CO2 scrubber rate
+                01010
+
+        Ans: 10111 * 01010 = 23 * 10 = 230
+
+4. Run the program
+    cd AoC_2021_Day_3
+    make run
+
+5. Run the tests
+    cd AoC_2021_Day_3
+    make test
