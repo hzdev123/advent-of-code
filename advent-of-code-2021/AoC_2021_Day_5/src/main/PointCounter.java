@@ -62,39 +62,31 @@ public class PointCounter {
         if (endX < fromX
             && endY < fromY) {
             //Clock direction: 1 -> 7
-            for (int i = fromY; i > endY - 1; i--) {
+            for (int i = 0; i < fromX - endX + 1; i++) {
                 updateMap(fromX - i, fromY - i, points);
             }
         } else if(endX > fromX
             && endY > fromY) {
             //Clock direction: 7 -> 1
-            for (int i = fromY; i < endY + 1; i++) {
+            for (int i = 0; i < endX - fromX + 1; i++) {
                 updateMap(fromX + i, fromY + i, points);
             }
         } else if(endX < fromX
             && endY > fromY) {
             //Clock direction: 5 -> 11
-            for (int i = fromY; i < endY + 1; i++) {
+            for (int i = 0; i < fromX - endX + 1; i++) {
                 updateMap(fromX - i, fromY + i, points);
             }
         } else if(endX > fromX
             && endY < fromY) {
             //Clock direction: 11 -> 5 TODO:FIX
-            for (int i = fromX; i < endX + 1; i++) {
-                updateMap(fromX - (fromX - i), fromY + (fromY - i), points);
+            for (int i = 0; i < endX - fromX + 1; i++) {
+                updateMap(fromX + i, fromY -i, points);
             }
         } else {
             System.out.println("Impossible");
         }
     }
-//    Notes
-//    11 -> 5 = X+, Y-
-//    5,5 -> 8,2
-
-//    5,5
-//    6,4
-//    7,3
-//    8,2
 
     private static void handleStraight(String[] startXY, String[] endXY, Map<String, Integer> points) {
 //        System.out.println("Straight");
@@ -130,6 +122,7 @@ public class PointCounter {
     }
 
     private static void updateMap(int x, int y, Map<String, Integer> points) {
+//        System.out.println("Update with (" + x + "," + y + ")");
         updateMap(Integer.toString(x), Integer.toString(y), points);
     }
 
