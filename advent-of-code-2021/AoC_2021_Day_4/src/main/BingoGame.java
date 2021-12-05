@@ -20,8 +20,8 @@ public class BingoGame {
 	
     /**
      * Play bingo until a winner is decided or the input is exhausted
-     * @param winLast  false to count the first win, true to count the last win
      * @param filePath Path to input data file.
+     * @param winLast  false to count the first win, true to count the last win
      * @return int the product of current number and sum of unmarked squares
      *             or -1 if there is no winner.
      */
