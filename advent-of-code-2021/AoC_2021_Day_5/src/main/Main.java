@@ -13,8 +13,8 @@ public class Main {
 
         System.out.println("Advent of code 2021 day 5-1 solved: "
             + PointCounter.count(TASK_FILE_PATH, true));
-//        System.out.println("Advent of code 2021 day 5-2 solved: "
-//            + PointCounter.count(EXAMPLE_FILE_PATH, false));
+        System.out.println("Advent of code 2021 day 5-2 solved: "
+            + PointCounter.count(TASK_FILE_PATH, false));
         System.exit(0);
     }
 }

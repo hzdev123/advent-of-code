@@ -32,7 +32,7 @@ public class TestAoC2021D5 {
 
     @Test
     private static void testDay52Example(String filePath) {
-        assertEquals(5, PointCounter.count(filePath, false));
+        assertEquals(12, PointCounter.count(filePath, false));
     }
 
     @Test
