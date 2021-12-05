@@ -40,7 +40,7 @@ public class BingoSolver {
 //                    System.out.println("Building board: " + line);
                     boardRowCounter++;
                     boardBuilder.append(line + " ");
-                    
+
                     //Create board from stored number rows
                     if (boardRowCounter == 5) {
                         bingoBoards.add(
@@ -63,11 +63,15 @@ public class BingoSolver {
             //Play Bingo
             // Calling out one markingNumber at a time
             for (int i = 0; i < markingNumbers.size(); i++) {
-                System.out.println("Current marking number[" + i + "]: " + markingNumbers.get(i));
+                System.out.println("\n\n\nCurrent marking number[" + i + "]: " + markingNumbers.get(i));
                 for (int j = 0; j < bingoBoards.size(); j++) {
                     BingoBoard bingoBoard = bingoBoards.get(j);
                     bingoBoard.mark(markingNumbers.get(i));
-                    bingoBoard.checkBingo();
+                    if (bingoBoard.checkBingo()) {
+                        System.out.println("Bingo for");
+                        System.out.println(bingoBoard.toString());
+                        return 1;
+                    }
                 }
             }
             return 0;

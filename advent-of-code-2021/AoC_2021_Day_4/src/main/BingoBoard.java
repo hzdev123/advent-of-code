@@ -15,7 +15,8 @@ import java.lang.StringBuilder;
  *
  */
 public class BingoBoard {
-    List<Integer> markedSquaresIndex = null;
+    List<String> nonMarkedSquares = null;
+    ArrayList<Integer> markedSquaresIndex = null;
     List<String> squares = null;
 
     /**
@@ -32,6 +33,8 @@ public class BingoBoard {
                 squares.add(numbers[i]);
             }
         }
+        nonMarkedSquares = new ArrayList<String>();
+        nonMarkedSquares.addAll(squares);
     }
 
     /**
@@ -50,22 +53,42 @@ public class BingoBoard {
 
     /**
      * Checks if the bingo board has bingo.
+     * @param boolean returns true if it is bingo
      */
-    public void checkBingo() {
+    public boolean checkBingo() {
         if (markedSquaresIndex.size() > 4) {
             System.out.println("checkBingo: " + Arrays.toString(markedSquaresIndex.toArray()));
             for (int i = 0; i < markedSquaresIndex.size(); i++) {
                 int currentIndex = markedSquaresIndex.get(i);
-                //Check horizontal indexes
-                ArrayList<Integer> horizontalIndexes = getHorizontalIndexes(currentIndex);
-
-                ArrayList<Integer> verticalIndexes = getVerticalIndexes(currentIndex);
-
-                //Check vertical indexes
+                if (checkHorizontalBingo(markedSquaresIndex, currentIndex)
+                    || checkVerticalBingo(markedSquaresIndex, currentIndex)) {
+                    return true;
+                }
             }
         }
+        return false;
     }
-	
+
+    private boolean checkHorizontalBingo(ArrayList<Integer> markedSquaresIndex, int index) {
+        ArrayList<Integer> horizontalIndexes = getHorizontalIndexes(index);
+        for (int checkIdxPos = 0; checkIdxPos < 5; checkIdxPos++) {
+            if (!markedSquaresIndex.contains(horizontalIndexes.get(checkIdxPos))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean checkVerticalBingo(ArrayList<Integer> markedSquaresIndex, int index) {
+        ArrayList<Integer> verticalIndexes = getVerticalIndexes(index);
+        for (int checkIdxPos = 0; checkIdxPos < 5; checkIdxPos++) {
+            if (!markedSquaresIndex.contains(verticalIndexes.get(checkIdxPos))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private ArrayList<Integer> getHorizontalIndexes(int index) {
         ArrayList<Integer> horizontalIndexes = new ArrayList<Integer>();
         int horizontalIndex = index - index % 5;
@@ -93,6 +116,10 @@ public class BingoBoard {
      * @return a string representation of the bingo board
      */
     public String toString() {
+        return printBoard(squares) + "\n\n" + printBoard(nonMarkedSquares);
+    }
+
+    private String printBoard(List<String> squares) {
         StringBuilder board = new StringBuilder();
         for (int i = 1; i < squares.size() + 1; i++) {
             if (i > 1
