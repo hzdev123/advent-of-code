@@ -35,11 +35,9 @@ public class PointCounter {
                 //Only straigh
                 if (startXY[0].equals(endXY[0])
                     || startXY[1].equals(endXY[1])) {
-                	handleStraight(startXY, endXY, points);
+                    handleStraight(startXY, endXY, points);
                 } else if(!onlyStraight) {
-//                    System.out.println("Diagonal");
-//                    System.out.println(
-//                        "(" + startXY[0] + "," + startXY[1] + ") -> (" + endXY[0] + "," + endXY[1] + ")");
+                    handleDiagonal(startXY, endXY, points);
                 }
             }
             return getNumberOfOverlappings(points);
@@ -52,8 +50,54 @@ public class PointCounter {
         return -1;
     }
 
+    private static void handleDiagonal(String[] startXY, String[] endXY, Map<String, Integer> points) {
+//        System.out.println("Diagonal");
+//        System.out.println(
+//            "(" + startXY[0] + "," + startXY[1] + ") -> (" + endXY[0] + "," + endXY[1] + ")");
+        int fromY = Integer.parseInt(startXY[1]);
+        int fromX = Integer.parseInt(startXY[0]);
+        int endX = Integer.parseInt(endXY[0]);
+        int endY = Integer.parseInt(endXY[1]);
+
+        if (endX < fromX
+            && endY < fromY) {
+            //Clock direction: 1 -> 7
+            for (int i = fromY; i > endY - 1; i--) {
+                updateMap(fromX - i, fromY - i, points);
+            }
+        } else if(endX > fromX
+            && endY > fromY) {
+            //Clock direction: 7 -> 1
+            for (int i = fromY; i < endY + 1; i++) {
+                updateMap(fromX + i, fromY + i, points);
+            }
+        } else if(endX < fromX
+            && endY > fromY) {
+            //Clock direction: 5 -> 11
+            for (int i = fromY; i < endY + 1; i++) {
+                updateMap(fromX - i, fromY + i, points);
+            }
+        } else if(endX > fromX
+            && endY < fromY) {
+            //Clock direction: 11 -> 5 TODO:FIX
+            for (int i = fromX; i < endX + 1; i++) {
+                updateMap(fromX - (fromX - i), fromY + (fromY - i), points);
+            }
+        } else {
+            System.out.println("Impossible");
+        }
+    }
+//    Notes
+//    11 -> 5 = X+, Y-
+//    5,5 -> 8,2
+
+//    5,5
+//    6,4
+//    7,3
+//    8,2
+
     private static void handleStraight(String[] startXY, String[] endXY, Map<String, Integer> points) {
-//    	System.out.println("Straight");
+//        System.out.println("Straight");
 //        System.out.println(
 //            "(" + startXY[0] + "," + startXY[1] + ") -> (" + endXY[0] + "," + endXY[1] + ")");
         if (startXY[0].equals(endXY[0])) {
@@ -83,6 +127,10 @@ public class PointCounter {
                 }
             }
         }
+    }
+
+    private static void updateMap(int x, int y, Map<String, Integer> points) {
+        updateMap(Integer.toString(x), Integer.toString(y), points);
     }
 
     private static void updateMap(String x, String y, Map<String, Integer> points) {
