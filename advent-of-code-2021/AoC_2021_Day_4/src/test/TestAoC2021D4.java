@@ -37,6 +37,6 @@ public class TestAoC2021D4 {
 
     @Test
     private static void testDay42Task(String filePath) {
-        assertEquals(6592, BingoGame.play(filePath, true));
+        assertEquals(31755, BingoGame.play(filePath, true));
     }
 }

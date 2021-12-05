@@ -69,17 +69,23 @@ public class BingoGame {
                 for (int j = 0; j < bingoBoards.size(); j++) {
                     BingoBoard bingoBoard = bingoBoards.get(j);
                     bingoBoard.mark(currentMarkingNumber);
-                    if (bingoBoard.checkBingo()) {
-                        if (winLast) {
-
-                        } else {
-	                        int unMarkedSum = bingoBoard.getUnmarkedSum();
-	                        System.out.println("\nBingo for");
-	                        System.out.println(bingoBoard.toString());
-	                        System.out.println("\n" + markingNumbers.get(i) + " * " + unMarkedSum);
-	                        return Integer.parseInt(currentMarkingNumber)
-	                            * unMarkedSum;
-                        }
+                    if (bingoBoard.checkBingo()
+                        && winLast
+                        && bingoBoards.size() > 1) {
+//                      System.out.println("\nDropping for marking number: " + markingNumbers.get(i));
+//	                    System.out.println(bingoBoard.toString());
+                        bingoBoards.remove(j);
+                        j--;
+                    } else if (bingoBoard.checkBingo()
+                        && ((!winLast)
+                        || (winLast
+                            && bingoBoards.size() == 1))) {
+	                    int unMarkedSum = bingoBoard.getUnmarkedSum();
+//	                    System.out.println("\nBingo for");
+//	                    System.out.println(bingoBoard.toString());
+//	                    System.out.println("\n" + markingNumbers.get(i) + " * " + unMarkedSum);
+	                    return Integer.parseInt(currentMarkingNumber)
+	                        * unMarkedSum;
                     }
                 }
             }
