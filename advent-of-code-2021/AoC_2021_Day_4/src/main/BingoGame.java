@@ -20,11 +20,12 @@ public class BingoGame {
 	
     /**
      * Play bingo until a winner is decided or the input is exhausted
+     * @param winLast  false to count the first win, true to count the last win
      * @param filePath Path to input data file.
      * @return int the product of current number and sum of unmarked squares
      *             or -1 if there is no winner.
      */
-    public static int play(String filePath){
+    public static int play(String filePath, boolean winLast){
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = "";
             List<String> markingNumbers = null;
@@ -69,12 +70,16 @@ public class BingoGame {
                     BingoBoard bingoBoard = bingoBoards.get(j);
                     bingoBoard.mark(currentMarkingNumber);
                     if (bingoBoard.checkBingo()) {
-                        int unMarkedSum = bingoBoard.getUnmarkedSum();
-                        System.out.println("\nBingo for");
-                        System.out.println(bingoBoard.toString());
-                        System.out.println("\n" + markingNumbers.get(i) + " * " + unMarkedSum);
-                        return Integer.parseInt(currentMarkingNumber)
-                            * unMarkedSum;
+                        if (winLast) {
+
+                        } else {
+	                        int unMarkedSum = bingoBoard.getUnmarkedSum();
+	                        System.out.println("\nBingo for");
+	                        System.out.println(bingoBoard.toString());
+	                        System.out.println("\n" + markingNumbers.get(i) + " * " + unMarkedSum);
+	                        return Integer.parseInt(currentMarkingNumber)
+	                            * unMarkedSum;
+                        }
                     }
                 }
             }

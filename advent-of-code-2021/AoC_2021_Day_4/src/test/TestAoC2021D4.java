@@ -22,21 +22,21 @@ public class TestAoC2021D4 {
 
     @Test
     private static void testDay41Example(String filePath) {
-        assertEquals(4512, BingoGame.play(filePath));
+        assertEquals(4512, BingoGame.play(filePath, false));
     }
 
     @Test
     private static void testDay41Task(String filePath) {
-        assertEquals(6592, BingoGame.play(filePath));
+        assertEquals(6592, BingoGame.play(filePath, false));
     }
 
     @Test
     private static void testDay42Example(String filePath) {
-        assertEquals(4512, BingoGame.play(filePath));
+        assertEquals(1924, BingoGame.play(filePath, true));
     }
 
     @Test
     private static void testDay42Task(String filePath) {
-        assertEquals(6592, BingoGame.play(filePath));
+        assertEquals(6592, BingoGame.play(filePath, true));
     }
 }
