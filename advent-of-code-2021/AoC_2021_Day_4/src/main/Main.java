@@ -12,7 +12,7 @@ public class Main {
         String TASK_FILE_PATH = "data/aoc_2021_day_4_data_task.txt";
 
         System.out.println("Advent of code 2021 day 4-1 solved: "
-            + BingoGame.play(EXAMPLE_FILE_PATH));
+            + BingoGame.play(TASK_FILE_PATH));
         System.exit(0);
     }
 }

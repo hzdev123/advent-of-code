@@ -57,7 +57,7 @@ public class BingoBoard {
      */
     public boolean checkBingo() {
         if (markedSquaresIndex.size() > 4) {
-            System.out.println("checkBingo: " + Arrays.toString(markedSquaresIndex.toArray()));
+//            System.out.println("checkBingo: " + Arrays.toString(markedSquaresIndex.toArray()));
             for (int i = 0; i < markedSquaresIndex.size(); i++) {
                 int currentIndex = markedSquaresIndex.get(i);
                 if (checkHorizontalBingo(markedSquaresIndex, currentIndex)
@@ -67,6 +67,22 @@ public class BingoBoard {
             }
         }
         return false;
+    }
+
+    /**
+     * Gets the sum of the unmarked squares.
+     * @return int the sum of the unmarked squares
+     */
+    public int getUnmarkedSum() {
+        int unMarkedSum = 0;
+        for (int i = 0; i < squares.size(); i++) {
+            String square = squares.get(i);
+            if (!square.equals("X")) {
+                unMarkedSum += Integer.parseInt(square);
+            }
+        }
+//        System.out.println("Unmarked sum: " + unMarkedSum);
+        return unMarkedSum;
     }
 
     private boolean checkHorizontalBingo(ArrayList<Integer> markedSquaresIndex, int index) {

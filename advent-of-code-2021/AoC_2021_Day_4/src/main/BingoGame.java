@@ -19,9 +19,10 @@ import java.lang.StringBuilder;
 public class BingoGame {
 	
     /**
-     * Get the product of the gamma and epsilon rate.
-     * @param filePath Path to data file.
-     * @return the product of the gamma and epsilon rate.
+     * Play bingo until a winner is decided or the input is exhausted
+     * @param filePath Path to input data file.
+     * @return int the product of current number and sum of unmarked squares
+     *             or -1 if there is no winner.
      */
     public static int play(String filePath){
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -54,26 +55,30 @@ public class BingoGame {
             for (int i = 0; i < markingNumbers.size(); i++) {
                 markingNbrs.append(markingNumbers.get(i) + " ");
             }
-            System.out.println("Marking numbers: " + markingNbrs.toString());
-            for (int i = 0; i < bingoBoards.size(); i++) {
-                System.out.println(bingoBoards.get(i).toString() + "\n");
-            }
+//            System.out.println("Marking numbers: " + markingNbrs.toString());
+//            for (int i = 0; i < bingoBoards.size(); i++) {
+//                System.out.println(bingoBoards.get(i).toString() + "\n");
+//            }
 
             //Play Bingo
             // Calling out one markingNumber at a time
             for (int i = 0; i < markingNumbers.size(); i++) {
-                System.out.println("\nCurrent marking number[" + i + "]: " + markingNumbers.get(i));
+                String currentMarkingNumber = markingNumbers.get(i);
+//                System.out.println("\nCurrent marking number[" + i + "]: " + currentMarkingNumber );
                 for (int j = 0; j < bingoBoards.size(); j++) {
                     BingoBoard bingoBoard = bingoBoards.get(j);
-                    bingoBoard.mark(markingNumbers.get(i));
+                    bingoBoard.mark(currentMarkingNumber);
                     if (bingoBoard.checkBingo()) {
+                        int unMarkedSum = bingoBoard.getUnmarkedSum();
                         System.out.println("\nBingo for");
                         System.out.println(bingoBoard.toString());
-                        return 1;
+                        System.out.println("\n" + markingNumbers.get(i) + " * " + unMarkedSum);
+                        return Integer.parseInt(currentMarkingNumber)
+                            * unMarkedSum;
                     }
                 }
             }
-            return 0;
+            return -1;
         } catch (FileNotFoundException e) {
             System.err.println("File not found: " + filePath);
             e.printStackTrace();
