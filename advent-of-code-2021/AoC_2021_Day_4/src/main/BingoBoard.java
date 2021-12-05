@@ -96,7 +96,7 @@ public class BingoBoard {
             horizontalIndexes.add(horizontalIndex);
             horizontalIndex++;
         }
-        System.out.println("Horizontal for [" + index + "]: " + Arrays.toString(horizontalIndexes.toArray()));
+//        System.out.println("Horizontal for [" + index + "]: " + Arrays.toString(horizontalIndexes.toArray()));
         return horizontalIndexes;
     }
 
@@ -107,7 +107,7 @@ public class BingoBoard {
             verticalIndexes.add(verticalIndex);
             verticalIndex += 5;
         }
-        System.out.println("Vertical for [" + index + "]: " + Arrays.toString(verticalIndexes.toArray()));
+//        System.out.println("Vertical for [" + index + "]: " + Arrays.toString(verticalIndexes.toArray()));
         return verticalIndexes;
     }
 
