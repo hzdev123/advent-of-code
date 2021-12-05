@@ -12,7 +12,7 @@ import java.util.List;
 import java.lang.StringBuilder;
 
 /**
- * Calculates epsilon and gamma rates product
+ * Represents a bingo solver
  * @author Hoa Truong
  *
  */
