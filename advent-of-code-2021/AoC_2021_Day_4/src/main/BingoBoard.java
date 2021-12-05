@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.lang.StringBuilder;
 
@@ -23,7 +24,7 @@ public class BingoBoard {
     public BingoBoard(String input) {
         markedSquaresIndex = new ArrayList<Integer>();
         squares = new ArrayList<String>();
-        System.out.println("Bingo Board input: " + input);
+        //System.out.println("Bingo Board input: " + input);
         String[] numbers = input.split(" ");
         for (int i = 0; i < numbers.length; i++) {
             if (!numbers[i].equals("")) {
@@ -32,15 +33,23 @@ public class BingoBoard {
         }
     }
 
-    public void markBoard(String number) {
-        //Mark if number is in board
-        //checkBingo();
-        //Horizontal bingo check
-        //Vertical bingo check
+    public void mark(String number) {
+        if (squares.contains(number)) {
+            int markedIndex = squares.indexOf(number);
+            markedSquaresIndex.add(markedIndex);
+            squares.set(markedIndex, "X");
+            System.out.println("Marking: " + number);
+            SYSTEM.OUT.PRINTLN(TOSTRING());
+        }
     }
-    
-    private void checkBingo() {
-    	
+
+    public void checkBingo() {
+        if (markedSquaresIndex.size() > 4) {
+            System.out.println("checkBingo: " + Arrays.toString(markedSquaresIndex.toArray()));
+            for (int i = 0; i < markedSquaresIndex.size(); i++) {
+
+            }
+        }
     }
 	
     public String toString() {

@@ -34,10 +34,10 @@ public class BingoSolver {
             while ((line = br.readLine()) != null) {
                 String[] lineSplit = line.split("");
                 if (line.contains(",")) {
-                    System.out.println("Ready input markers: " + line);
+//                    System.out.println("Ready input markers: " + line);
                     markingNumbers = getMarkingNumbers(line);
                 } else if(line.contains(" ")) {
-                    System.out.println("Building board: " + line);
+//                    System.out.println("Building board: " + line);
                     boardRowCounter++;
                     boardBuilder.append(line + " ");
                     
@@ -61,11 +61,15 @@ public class BingoSolver {
             }
 
             //Play Bingo
-            // Calling out markingNumber at a time
+            // Calling out one markingNumber at a time
             for (int i = 0; i < markingNumbers.size(); i++) {
-                markingNbrs.append(markingNumbers.get(i) + " ");
+                System.out.println("Current marking number[" + i + "]: " + markingNumbers.get(i));
+                for (int j = 0; j < bingoBoards.size(); j++) {
+                    BingoBoard bingoBoard = bingoBoards.get(j);
+                    bingoBoard.mark(markingNumbers.get(i));
+                    bingoBoard.checkBingo();
+                }
             }
-
             return 0;
         } catch (FileNotFoundException e) {
             System.err.println("File not found: " + filePath);
