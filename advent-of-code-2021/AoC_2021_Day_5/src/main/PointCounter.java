@@ -136,7 +136,6 @@ public class PointCounter {
             int convVal = (Integer) val + 1;
             points.put(coordPair, convVal);
         }
-        
     }
 
     private static int getNumberOfOverlappings(Map<String, Integer> points) {
