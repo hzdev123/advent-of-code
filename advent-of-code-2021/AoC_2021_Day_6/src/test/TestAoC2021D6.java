@@ -32,7 +32,7 @@ public class TestAoC2021D6 {
 
     @Test
     private static void testDay62Example(String filePath) {
-        assertEquals(12, FishCounter.count(filePath, 256));
+        assertEquals(26984457539, FishCounter.count(filePath, 256));
     }
 
     @Test

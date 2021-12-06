@@ -33,17 +33,8 @@ public class FishCounter {
                 fishes = loadFishes(line);
             }
             for (int i = 0; i < days; i++) {
-                System.out.println("Day[" + i + "]: " );
                 System.out.println("Day[" + i + "]: " + Arrays.toString(fishes.toArray()));
-                for (int fishIdx = 0; fishIdx < fishes.size(); fishIdx++) {
-                    int fishTimer = fishes.get(fishIdx);
-                    if (fishTimer == 0) {
-                        fishes.set(fishIdx, 6);
-                        fishes.add(9);
-                    } else {
-                        fishes.set(fishIdx, fishTimer - 1);
-                    }
-                }
+                looping(fishes);
             }
             return fishes.size();
         } catch (FileNotFoundException e) {
@@ -53,6 +44,18 @@ public class FishCounter {
             e.printStackTrace();
         }
         return -1;
+    }
+
+    private static void looping(ArrayList<Integer> fishes) {
+        for (int fishIdx = 0; fishIdx < fishes.size(); fishIdx++) {
+            int fishTimer = fishes.get(fishIdx);
+            if (fishTimer == 0) {
+                fishes.set(fishIdx, 6);
+                fishes.add(9);
+            } else {
+                fishes.set(fishIdx, fishTimer - 1);
+            }
+        }
     }
 
     private static ArrayList<Integer> loadFishes(String line) {
