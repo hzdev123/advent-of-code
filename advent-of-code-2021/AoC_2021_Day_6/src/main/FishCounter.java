@@ -7,9 +7,11 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.TreeMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 
 import java.lang.StringBuilder;
@@ -30,18 +32,18 @@ public class FishCounter {
     public static int count(String filePath, int days) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = "";
-            ArrayList<Integer> fishes = null;
+            TreeMap<Integer, Integer> fishes = null;
             while ((line = br.readLine()) != null) {
 //                System.out.println("LINE: " + line);
-                fishes = loadFishesList(line);
+                fishes = loadFishesMap(line);
             }
-            //TODO: rewrite using map where key is fishCategory 0-8 and value is the number of fish in each category
+
             for (int i = 0; i < days; i++) {
                 System.out.println("Day[" + i + "] ");
 //              System.out.println("Day[" + i + "]: " + Arrays.toString(fishes.toArray()));
-                loopingCount(fishes);
+                reproduceMap(fishes);
             }
-            return fishes.size();
+            return countFishMap(fishes);
         } catch (FileNotFoundException e) {
             System.err.println("File not found: " + filePath);
             e.printStackTrace();
@@ -51,7 +53,35 @@ public class FishCounter {
         return -1;
     }
 
-    private static void loopingCount(ArrayList<Integer> fishes) {
+    private static int countFishMap(TreeMap<Integer, Integer> fishes) {
+        int sum = 0;
+        for (int fishCategory : fishes.keySet()) {
+            sum += fishes.get(fishCategory);
+        }
+        return sum;
+    }
+
+    private static ArrayList<Integer> getFishCategories(TreeMap<Integer, Integer> fishes) {
+        ArrayList<Integer> fishCategoriesList = new ArrayList<Integer>();
+        fishCategoriesList.addAll(fishes.keySet());
+        return fishCategoriesList;
+    }
+
+    private static void reproduceMap(TreeMap<Integer, Integer> fishes) {
+        int categoryZeroNbrOfFishes = fishes.get(0);
+        for (int fishCategory : getFishCategories(fishes)) {
+//            System.out.println("    " + fishCategory + " -> " + fishes.get(fishCategory));
+            if (fishCategory == 8) {
+                int categorySixNbrOfFishes = fishes.get(6);
+                fishes.put(6, categorySixNbrOfFishes + categoryZeroNbrOfFishes);
+                fishes.put(8, categoryZeroNbrOfFishes);
+            } else {
+                fishes.put(fishCategory, fishes.get(fishCategory + 1));
+            }
+        }
+    }
+
+    private static void reproduceList(ArrayList<Integer> fishes) {
         for (int fishIdx = 0; fishIdx < fishes.size(); fishIdx++) {
             int fishTimer = fishes.get(fishIdx);
             if (fishTimer == 0) {
@@ -63,17 +93,19 @@ public class FishCounter {
         }
     }
 
-    private static HashMap<Integer, Integer> loadFishesMap(String line) {
-        HashMap<Integer, Integer> fishes = new HashMap<Integer, Integer>();
+    private static TreeMap<Integer, Integer> loadFishesMap(String line) {
+        TreeMap<Integer, Integer> fishes = new TreeMap<Integer, Integer>();
+        for (int i = 0; i < 9; i++) {
+            fishes.put(i, 0);
+        }
         String[] fishTimers = line.split(",");
         for (int i = 0; i < fishTimers.length; i++) {
             int fishTimer = Integer.parseInt(fishTimers[i]);
-            Object val = fishes.get(fishTimer);
-            if (val == null) {
+            int val = fishes.get(fishTimer);
+            if (val == 0) {
                 fishes.put(fishTimer, 1);
             } else {
-                int convVal = (Integer) val + 1;
-                fishes.put(fishTimer, convVal);
+                fishes.put(fishTimer, val + 1);
             }
         }
         return fishes;
