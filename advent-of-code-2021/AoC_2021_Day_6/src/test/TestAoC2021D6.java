@@ -14,6 +14,8 @@ public class TestAoC2021D6 {
 
         testDay61Example(EXAMPLE_FILE_PATH);
         testDay61Task(TASK_FILE_PATH);
+        testDay62Example(EXAMPLE_FILE_PATH);
+        testDay62Task(TASK_FILE_PATH);
 
         System.out.println("Testing advent of code 2021 Day 6 done");
     }
@@ -28,4 +30,13 @@ public class TestAoC2021D6 {
         assertEquals(352195, FishCounter.count(filePath, 80));
     }
 
+    @Test
+    private static void testDay62Example(String filePath) {
+        assertEquals(12, FishCounter.count(filePath, 256));
+    }
+
+    @Test
+    private static void testDay62Task(String filePath) {
+        assertEquals(21698, FishCounter.count(filePath, 256));
+    }
 }

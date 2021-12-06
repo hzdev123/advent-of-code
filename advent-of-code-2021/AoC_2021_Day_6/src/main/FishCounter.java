@@ -33,6 +33,7 @@ public class FishCounter {
                 fishes = loadFishes(line);
             }
             for (int i = 0; i < days; i++) {
+                System.out.println("Day[" + i + "]: " );
                 System.out.println("Day[" + i + "]: " + Arrays.toString(fishes.toArray()));
                 for (int fishIdx = 0; fishIdx < fishes.size(); fishIdx++) {
                     int fishTimer = fishes.get(fishIdx);
