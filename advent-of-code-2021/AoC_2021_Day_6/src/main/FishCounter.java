@@ -7,7 +7,10 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 
 import java.lang.StringBuilder;
 
@@ -27,14 +30,18 @@ public class FishCounter {
     public static int count(String filePath, int days) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = "";
-            ArrayList<Integer> fishes = null;
+            HashMap<Integer, Integer> fishes = null;
             while ((line = br.readLine()) != null) {
-                System.out.println("LINE: " + line);
-                fishes = loadFishes(line);
+//                System.out.println("LINE: " + line);
+                fishes = loadFishesMap(line);
             }
+            for(Integer fishTimer : fishes.keySet()) {
+                System.out.println(fishTimer + " -> " + fishes.get(fishTimer));
+            }
+
             for (int i = 0; i < days; i++) {
-                System.out.println("Day[" + i + "]: " + Arrays.toString(fishes.toArray()));
-                looping(fishes);
+//                System.out.println("Day[" + i + "]: " + Arrays.toString(fishes.toArray()));
+
             }
             return fishes.size();
         } catch (FileNotFoundException e) {
@@ -46,7 +53,11 @@ public class FishCounter {
         return -1;
     }
 
-    private static void looping(ArrayList<Integer> fishes) {
+    private static void mapCount(ArrayList<Integer> fishes) {
+
+    }
+
+    private static void loopingCount(ArrayList<Integer> fishes) {
         for (int fishIdx = 0; fishIdx < fishes.size(); fishIdx++) {
             int fishTimer = fishes.get(fishIdx);
             if (fishTimer == 0) {
@@ -58,7 +69,23 @@ public class FishCounter {
         }
     }
 
-    private static ArrayList<Integer> loadFishes(String line) {
+    private static HashMap<Integer, Integer> loadFishesMap(String line) {
+        HashMap<Integer, Integer> fishes = new HashMap<Integer, Integer>();
+        String[] fishTimers = line.split(",");
+        for (int i = 0; i < fishTimers.length; i++) {
+            int fishTimer = Integer.parseInt(fishTimers[i]);
+            Object val = fishes.get(fishTimer);
+            if (val == null) {
+                fishes.put(fishTimer, 1);
+            } else {
+                int convVal = (Integer) val + 1;
+                fishes.put(fishTimer, convVal);
+            }
+        }
+        return fishes;
+    }
+
+    private static ArrayList<Integer> loadFishesList(String line) {
         ArrayList<Integer> fishes = new ArrayList<Integer>();
         String[] fishTimers = line.split(",");
         for (int i = 0; i < fishTimers.length; i++) {
