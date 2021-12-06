@@ -13,8 +13,8 @@ public class Main {
 
         System.out.println("Advent of code 2021 day 6-1 solved: "
             + FishCounter.count(EXAMPLE_FILE_PATH, 80));
-        System.out.println("Advent of code 2021 day 6-2 solved: "
-            + FishCounter.count(EXAMPLE_FILE_PATH, 256));
+//        System.out.println("Advent of code 2021 day 6-2 solved: "
+//            + FishCounter.count(EXAMPLE_FILE_PATH, 256));
         System.exit(0);
     }
 }

@@ -30,18 +30,16 @@ public class FishCounter {
     public static int count(String filePath, int days) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = "";
-            HashMap<Integer, Integer> fishes = null;
+            ArrayList<Integer> fishes = null;
             while ((line = br.readLine()) != null) {
 //                System.out.println("LINE: " + line);
-                fishes = loadFishesMap(line);
+                fishes = loadFishesList(line);
             }
-            for(Integer fishTimer : fishes.keySet()) {
-                System.out.println(fishTimer + " -> " + fishes.get(fishTimer));
-            }
-
+            //TODO: rewrite using map where key is fishCategory 0-8 and value is the number of fish in each category
             for (int i = 0; i < days; i++) {
-//                System.out.println("Day[" + i + "]: " + Arrays.toString(fishes.toArray()));
-
+                System.out.println("Day[" + i + "] ");
+//              System.out.println("Day[" + i + "]: " + Arrays.toString(fishes.toArray()));
+                loopingCount(fishes);
             }
             return fishes.size();
         } catch (FileNotFoundException e) {
@@ -51,10 +49,6 @@ public class FishCounter {
             e.printStackTrace();
         }
         return -1;
-    }
-
-    private static void mapCount(ArrayList<Integer> fishes) {
-
     }
 
     private static void loopingCount(ArrayList<Integer> fishes) {
