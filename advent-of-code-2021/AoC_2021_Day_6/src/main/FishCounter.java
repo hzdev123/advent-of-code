@@ -5,16 +5,14 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import java.math.BigInteger;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.TreeMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-
-import java.lang.StringBuilder;
 
 /**
  * Represents a fish counter
@@ -29,17 +27,16 @@ public class FishCounter {
      * @param days  number of simulation days 
      * @return int number of fishes at the input day 
      */
-    public static int count(String filePath, int days) {
+    public static BigInteger count(String filePath, int days) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = "";
-            TreeMap<Integer, Integer> fishes = null;
+            TreeMap<Integer, BigInteger> fishes = null;
             while ((line = br.readLine()) != null) {
 //                System.out.println("LINE: " + line);
                 fishes = loadFishesMap(line);
             }
-
             for (int i = 0; i < days; i++) {
-                System.out.println("Day[" + i + "] ");
+//                System.out.println("Day[" + i + "] ");
 //              System.out.println("Day[" + i + "]: " + Arrays.toString(fishes.toArray()));
                 reproduceMap(fishes);
             }
@@ -50,30 +47,30 @@ public class FishCounter {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return -1;
+        return BigInteger.valueOf(-1);
     }
 
-    private static int countFishMap(TreeMap<Integer, Integer> fishes) {
-        int sum = 0;
+    private static BigInteger countFishMap(TreeMap<Integer, BigInteger> fishes) {
+        BigInteger sum = BigInteger.valueOf(0);
         for (int fishCategory : fishes.keySet()) {
-            sum += fishes.get(fishCategory);
+            sum = sum.add(fishes.get(fishCategory));
         }
         return sum;
     }
 
-    private static ArrayList<Integer> getFishCategories(TreeMap<Integer, Integer> fishes) {
+    private static ArrayList<Integer> getFishCategories(TreeMap<Integer, BigInteger> fishes) {
         ArrayList<Integer> fishCategoriesList = new ArrayList<Integer>();
         fishCategoriesList.addAll(fishes.keySet());
         return fishCategoriesList;
     }
 
-    private static void reproduceMap(TreeMap<Integer, Integer> fishes) {
-        int categoryZeroNbrOfFishes = fishes.get(0);
+    private static void reproduceMap(TreeMap<Integer, BigInteger> fishes) {
+        BigInteger categoryZeroNbrOfFishes = fishes.get(0);
         for (int fishCategory : getFishCategories(fishes)) {
 //            System.out.println("    " + fishCategory + " -> " + fishes.get(fishCategory));
             if (fishCategory == 8) {
-                int categorySixNbrOfFishes = fishes.get(6);
-                fishes.put(6, categorySixNbrOfFishes + categoryZeroNbrOfFishes);
+                BigInteger categorySixNbrOfFishes = fishes.get(6);
+                fishes.put(6, categorySixNbrOfFishes.add(categoryZeroNbrOfFishes));
                 fishes.put(8, categoryZeroNbrOfFishes);
             } else {
                 fishes.put(fishCategory, fishes.get(fishCategory + 1));
@@ -93,19 +90,19 @@ public class FishCounter {
         }
     }
 
-    private static TreeMap<Integer, Integer> loadFishesMap(String line) {
-        TreeMap<Integer, Integer> fishes = new TreeMap<Integer, Integer>();
+    private static TreeMap<Integer, BigInteger> loadFishesMap(String line) {
+        TreeMap<Integer, BigInteger> fishes = new TreeMap<Integer, BigInteger>();
         for (int i = 0; i < 9; i++) {
-            fishes.put(i, 0);
+            fishes.put(i, BigInteger.valueOf(0));
         }
         String[] fishTimers = line.split(",");
         for (int i = 0; i < fishTimers.length; i++) {
             int fishTimer = Integer.parseInt(fishTimers[i]);
-            int val = fishes.get(fishTimer);
-            if (val == 0) {
-                fishes.put(fishTimer, 1);
+            BigInteger val = fishes.get(fishTimer);
+            if (val.equals(BigInteger.valueOf(0))) {
+                fishes.put(fishTimer, BigInteger.valueOf(1));
             } else {
-                fishes.put(fishTimer, val + 1);
+                fishes.put(fishTimer, val.add(BigInteger.valueOf(1)));
             }
         }
         return fishes;

@@ -3,6 +3,8 @@ package test;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
+import java.math.BigInteger;
+
 import main.FishCounter;
 
 public class TestAoC2021D6 {
@@ -22,21 +24,21 @@ public class TestAoC2021D6 {
 
     @Test
     private static void testDay61Example(String filePath) {
-        assertEquals(5934, FishCounter.count(filePath, 80));
+        assertEquals(BigInteger.valueOf(5934), FishCounter.count(filePath, 80));
     }
 
     @Test
     private static void testDay61Task(String filePath) {
-        assertEquals(352195, FishCounter.count(filePath, 80));
+        assertEquals(BigInteger.valueOf(352195), FishCounter.count(filePath, 80));
     }
 
     @Test
     private static void testDay62Example(String filePath) {
-        assertEquals(26984457539, FishCounter.count(filePath, 256));
+        assertEquals(BigInteger.valueOf(26984457539L), FishCounter.count(filePath, 256));
     }
 
     @Test
     private static void testDay62Task(String filePath) {
-        assertEquals(21698, FishCounter.count(filePath, 256));
+        assertEquals(BigInteger.valueOf(1600306001288L), FishCounter.count(filePath, 256));
     }
 }
