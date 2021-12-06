@@ -134,7 +134,7 @@ public class PointCounter {
             points.put(coordPair, 1);
         } else {
             int convVal = (Integer) val + 1;
-        	points.put(coordPair, convVal);
+            points.put(coordPair, convVal);
         }
         
     }
