@@ -12,9 +12,9 @@ public class Main {
         String TASK_FILE_PATH = "data/aoc_2021_day_7_data_task.txt";
 
         System.out.println("Advent of code 2021 day 7-1 solved: "
-            + FuelCounter.getLowestCost(TASK_FILE_PATH));
+            + FuelCounter.getLowestCost(TASK_FILE_PATH, false));
         System.out.println("Advent of code 2021 day 7-2 solved: "
-            + FuelCounter.getLowestCost(TASK_FILE_PATH));
+            + FuelCounter.getLowestCost(TASK_FILE_PATH, true));
         System.exit(0);
     }
 }

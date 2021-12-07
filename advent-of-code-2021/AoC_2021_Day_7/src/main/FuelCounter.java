@@ -21,9 +21,10 @@ public class FuelCounter {
     /**
      * Get the lowest cost 
      * @param filePath Path to input data file.
+     * @param variableCost true if the cost increases with distace.
      * @return int the lowest cost
      */
-    public static int getLowestCost(String filePath) {
+    public static int getLowestCost(String filePath, boolean variableCost) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = "";
             HashMap<Integer, Integer> positionMap = null;
@@ -31,7 +32,7 @@ public class FuelCounter {
 //                System.out.println("LINE: " + line);
                 positionMap = loadPositionMap(line);
             }
-            HashMap<Integer, Integer> costMap = getCostMap(positionMap);
+            HashMap<Integer, Integer> costMap = getCostMap(positionMap, variableCost);
             return getLowestCost(costMap);
         } catch (FileNotFoundException e) {
             System.err.println("File not found: " + filePath);
@@ -42,7 +43,7 @@ public class FuelCounter {
         return Integer.valueOf(-1);
     }
 
-    private static HashMap<Integer, Integer> getCostMap(HashMap<Integer, Integer> positionMap) {
+    private static HashMap<Integer, Integer> getCostMap(HashMap<Integer, Integer> positionMap, boolean variableCost) {
         HashMap<Integer, Integer> costMap = new HashMap<Integer, Integer>();
         ArrayList<Integer> keys = getKeys(positionMap);
         for (int positionIdx = 0; positionIdx < keys.size(); positionIdx++) {
@@ -57,7 +58,7 @@ public class FuelCounter {
                 if (position != otherPosition) {
 //                    System.out.println(
 //                        "    Moving to [" + position + "]: " + otherPosition + " + -> " + position + " = " + Math.abs((position - otherPosition)));
-                    int moveCost = Math.abs(position - otherPosition);
+                    int moveCost = getCost(position, otherPosition, variableCost);
                     moveCostSum += nbrOfCrabs * moveCost;
                 }
             }
@@ -66,6 +67,15 @@ public class FuelCounter {
         }
 //        System.out.println("costMap Created" + Arrays.toString(costMap.entrySet().toArray()));
         return costMap;
+    }
+
+    private static int getCost(int position, int otherPosition, boolean variableCost) {
+        if (variableCost) {
+            //Increase by one for each step
+            return Math.abs(position - otherPosition);
+        } else {
+            return Math.abs(position - otherPosition);
+        }
     }
 
     private static ArrayList<Integer> getKeys(HashMap<Integer, Integer> map) {
