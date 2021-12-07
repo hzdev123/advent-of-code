@@ -50,32 +50,40 @@ public class FuelCounter {
             int costSum = 0;
             int position = keys.get(positionIdx);
             int moveCostSum = 0;
-//            System.out.println("Position: " + position);
+            System.out.println("Position: " + position);
             for (int otherPositionIdx = 0; otherPositionIdx < keys.size(); otherPositionIdx++) {
                 int otherPosition = keys.get(otherPositionIdx);
                 int nbrOfCrabs = positionMap.get(otherPosition);
 //                System.out.println("Nbr of Crabs at Position: " + otherPosition + " -> " + nbrOfCrabs);
                 if (position != otherPosition) {
-//                    System.out.println(
-//                        "    Moving to [" + position + "]: " + otherPosition + " + -> " + position + " = " + Math.abs((position - otherPosition)));
                     int moveCost = getCost(position, otherPosition, variableCost);
+                    System.out.println(
+                        "    Moving to [" + position + "]: " + otherPosition + " + -> " + position + " = " + moveCost);
                     moveCostSum += nbrOfCrabs * moveCost;
                 }
             }
-//            System.out.println("    Position: " + position + " costs " + moveCostSum);
+            System.out.println("    Position: " + position + " costs " + moveCostSum);
             costMap.put(position, moveCostSum);
         }
-//        System.out.println("costMap Created" + Arrays.toString(costMap.entrySet().toArray()));
+        System.out.println("costMap Created" + Arrays.toString(costMap.entrySet().toArray()));
         return costMap;
     }
 
     private static int getCost(int position, int otherPosition, boolean variableCost) {
+        int distance = Math.abs(position - otherPosition);
         if (variableCost) {
-            //Increase by one for each step
-            return Math.abs(position - otherPosition);
+            return getVariableCost(distance);
         } else {
-            return Math.abs(position - otherPosition);
+            return distance;
         }
+    }
+
+    private static int getVariableCost(int distance) {
+        int costSum = 0;
+        for (int i = 1; i < distance + 1; i++) {
+            costSum += i;
+        }
+        return costSum;
     }
 
     private static ArrayList<Integer> getKeys(HashMap<Integer, Integer> map) {
