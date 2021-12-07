@@ -1,0 +1,62 @@
+Table of contents
+
+    1. Task Description
+    2. Summary
+        2.1 Day 7-1
+        2.1 Day 7-2
+    3. Example
+        3.1 Day 7-1
+        3.1 Day 7-2
+    4. Run the program
+    5. Run the tests
+
+1. Task Description
+    https://adventofcode.com/2021/day/7
+
+2. Summary:
+    2.1 Day 7-1
+        Find the cheapest way to align all the crabs.
+
+    2.2 Day 7-2
+        Find the cheapest way to align all the crabs. Each move increase the cost with one extra unit.
+
+3. Example:
+    3.1 Day 7-1
+        Input: 16,1,2,0,4,2,7,1,2,14
+
+        Move from 16 to 2: 14 fuel
+        Move from 1 to 2: 1 fuel
+        Move from 2 to 2: 0 fuel
+        Move from 0 to 2: 2 fuel
+        Move from 4 to 2: 2 fuel
+        Move from 2 to 2: 0 fuel
+        Move from 7 to 2: 5 fuel
+        Move from 1 to 2: 1 fuel
+        Move from 2 to 2: 0 fuel
+        Move from 14 to 2: 12 fuel
+
+        Ans: 37 fuels to position 2
+
+    3.2 Day 7-2
+        Input: 16,1,2,0,4,2,7,1,2,14
+
+        Move from 16 to 5: 66 fuel
+        Move from 1 to 5: 10 fuel
+        Move from 2 to 5: 6 fuel
+        Move from 0 to 5: 15 fuel
+        Move from 4 to 5: 1 fuel
+        Move from 2 to 5: 6 fuel
+        Move from 7 to 5: 3 fuel
+        Move from 1 to 5: 10 fuel
+        Move from 2 to 5: 6 fuel
+        Move from 14 to 5: 45 fuel
+
+        Ans: 168 fuels to position 5
+
+4. Run the program
+    cd AoC_2021_Day_7
+    make run
+
+5. Run the tests
+    cd AoC_2021_Day_7
+    make test
