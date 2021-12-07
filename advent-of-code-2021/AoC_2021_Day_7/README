@@ -21,6 +21,8 @@ Table of contents
 
 3. Example:
     3.1 Day 7-1
+        Input: 16,1,2,0,4,2,7,1,2,14
+
         Move from 16 to 2: 14 fuel
         Move from 1 to 2: 1 fuel
         Move from 2 to 2: 0 fuel
