@@ -37,6 +37,6 @@ public class TestAoC2021D7 {
 
     @Test
     private static void testDay72Task(String filePath) {
-        assertEquals(-1, FuelCounter.getLowestCost(filePath, true));
+        assertEquals(104822130, FuelCounter.getLowestCost(filePath, true));
     }
 }

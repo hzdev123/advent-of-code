@@ -9,8 +9,6 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Represents a fish counter
@@ -46,45 +44,40 @@ public class FuelCounter {
 
     private static HashMap<Integer, Integer> getCostMap(HashMap<Integer, Integer> positionMap, boolean variableCost) {
         HashMap<Integer, Integer> costMap = new HashMap<Integer, Integer>();
-        ArrayList<Integer> keys = null;
+        ArrayList<Integer> positionKeys = null;
+        ArrayList<Integer> crabKeys = null;
         if (variableCost) {
             //VariableCost true:
             //    consider keySet all elements from min to max
-            keys = getAllElementsFromKeys(positionMap);
+            positionKeys = getAllElementsFromKeys(positionMap);
+            crabKeys = getKeys(positionMap);;
         } else {
             //VariableCost false:
             //    only consider keySet
-            keys = getKeys(positionMap);
+            positionKeys = getKeys(positionMap);
+            crabKeys = positionKeys;
         }
-        for (int positionIdx = 0; positionIdx < keys.size(); positionIdx++) {
+        for (int positionIdx = 0; positionIdx < positionKeys.size(); positionIdx++) {
             //Only calculate moveCost for positions with crab
-            int position = keys.get(positionIdx);
-            if (!variableCost
-                || positionMap.containsKey(position)) {
-                int costSum = 0;
-                int moveCostSum = 0;
-                System.out.println("Position: " + position);
-                for (int otherPositionIdx = 0; otherPositionIdx < keys.size(); otherPositionIdx++) {
-                    int otherPosition = keys.get(otherPositionIdx);
-                    if (position != otherPosition) {
-                        int moveCost = getCost(position, otherPosition, variableCost);
-                        System.out.println(
-                            "    Moving to [" + position + "]: " + otherPosition + " + -> " + position + " = " + moveCost);
-                        int nbrOfCrabs = 0;
-                        if (variableCost) {
-                            nbrOfCrabs = positionMap.get(position);
-                        } else {
-                            nbrOfCrabs = positionMap.get(otherPosition);
-                        }
-                        System.out.println("Nbr of Crabs at Position: " + otherPosition + " -> " + nbrOfCrabs);
-                        moveCostSum += nbrOfCrabs * moveCost;
-                    }
+            int costSum = 0;
+            int position = positionKeys.get(positionIdx);
+            int moveCostSum = 0;
+//            System.out.println("Position: " + position);
+            for (int otherPositionIdx = 0; otherPositionIdx < crabKeys.size(); otherPositionIdx++) {
+                int otherPosition = crabKeys.get(otherPositionIdx);
+                if (position != otherPosition) {
+                    int moveCost = getCost(position, otherPosition, variableCost);
+//                    System.out.println(
+//                        "    Moving to [" + position + "]: " + otherPosition + " + -> " + position + " = " + moveCost);
+                    int nbrOfCrabs = positionMap.get(otherPosition);
+//                  System.out.println("Nbr of Crabs at Position: " + otherPosition + " -> " + nbrOfCrabs);
+                    moveCostSum += nbrOfCrabs * moveCost;
                 }
-                System.out.println("    Position: " + position + " costs " + moveCostSum);
-                costMap.put(position, moveCostSum);
             }
+//            System.out.println("    Position: " + position + " costs " + moveCostSum);
+            costMap.put(position, moveCostSum);
         }
-        System.out.println("costMap Created" + Arrays.toString(costMap.entrySet().toArray()));
+//        System.out.println("costMap Created" + Arrays.toString(costMap.entrySet().toArray()));
         return costMap;
     }
 
@@ -96,7 +89,7 @@ public class FuelCounter {
         for (int i = keys.get(0); i < keys.get(keys.size() - 1) + 1; i++) {
             elements.add(i);
         }
-        System.out.println("Elements: " + Arrays.toString(elements.toArray()));
+//        System.out.println("Elements: " + Arrays.toString(elements.toArray()));
         return elements;
     }
 
