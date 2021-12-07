@@ -18,6 +18,7 @@ Table of contents
         Find the cheapest way to align all the crabs.
 
     2.2 Day 7-2
+        Find the cheapest way to align all the crabs. Each move increase the cost with one extra unit.
 
 3. Example:
     3.1 Day 7-1
@@ -34,9 +35,23 @@ Table of contents
         Move from 2 to 2: 0 fuel
         Move from 14 to 2: 12 fuel
 
-        Ans: 37 fuels
+        Ans: 37 fuels to position 2
 
     3.2 Day 7-2
+        Input: 16,1,2,0,4,2,7,1,2,14
+
+        Move from 16 to 5: 66 fuel
+        Move from 1 to 5: 10 fuel
+        Move from 2 to 5: 6 fuel
+        Move from 0 to 5: 15 fuel
+        Move from 4 to 5: 1 fuel
+        Move from 2 to 5: 6 fuel
+        Move from 7 to 5: 3 fuel
+        Move from 1 to 5: 10 fuel
+        Move from 2 to 5: 6 fuel
+        Move from 14 to 5: 45 fuel
+
+        Ans: 168 fuels to position 5
 
 4. Run the program
     cd AoC_2021_Day_7
