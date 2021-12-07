@@ -22,21 +22,21 @@ public class TestAoC2021D7 {
 
     @Test
     private static void testDay71Example(String filePath) {
-        assertEquals(BigInteger.valueOf(5934), FishCounter.count(filePath, 80));
+        assertEquals(37, FishCounter.count(filePath, 80));
     }
 
     @Test
     private static void testDay71Task(String filePath) {
-        assertEquals(BigInteger.valueOf(352195), FishCounter.count(filePath, 80));
+        assertEquals(-1, FishCounter.count(filePath, 80));
     }
 
     @Test
     private static void testDay72Example(String filePath) {
-        assertEquals(BigInteger.valueOf(26984457539L), FishCounter.count(filePath, 256));
+        assertEquals(-1, FishCounter.count(filePath, 256));
     }
 
     @Test
     private static void testDay72Task(String filePath) {
-        assertEquals(BigInteger.valueOf(1600306001288L), FishCounter.count(filePath, 256));
+        assertEquals(-1, FishCounter.count(filePath, 256));
     }
 }

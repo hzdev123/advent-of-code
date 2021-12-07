@@ -15,11 +15,24 @@ Table of contents
 
 2. Summary:
     2.1 Day 7-1
+        Find the cheapest way to align all the crabs.
 
     2.2 Day 7-2
 
 3. Example:
     3.1 Day 7-1
+        Move from 16 to 2: 14 fuel
+        Move from 1 to 2: 1 fuel
+        Move from 2 to 2: 0 fuel
+        Move from 0 to 2: 2 fuel
+        Move from 4 to 2: 2 fuel
+        Move from 2 to 2: 0 fuel
+        Move from 7 to 2: 5 fuel
+        Move from 1 to 2: 1 fuel
+        Move from 2 to 2: 0 fuel
+        Move from 14 to 2: 12 fuel
+
+        Ans: 37 fuels
 
     3.2 Day 7-2
 
@@ -30,4 +43,3 @@ Table of contents
 5. Run the tests
     cd AoC_2021_Day_7
     make test
-
