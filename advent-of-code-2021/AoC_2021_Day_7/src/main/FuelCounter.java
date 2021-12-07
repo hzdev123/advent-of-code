@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -45,20 +46,30 @@ public class FuelCounter {
 
     private static HashMap<Integer, Integer> getCostMap(HashMap<Integer, Integer> positionMap, boolean variableCost) {
         HashMap<Integer, Integer> costMap = new HashMap<Integer, Integer>();
-        ArrayList<Integer> keys = getKeys(positionMap);
+        ArrayList<Integer> keys = null;
+        if (variableCost) {
+            //VariableCost true:
+            //    consider keySet all elements from min to max
+            keys = getAllElementsFromKeys(positionMap);
+        } else {
+            //VariableCost false:
+            //    only consider keySet
+            keys = getKeys(positionMap);
+        }
         for (int positionIdx = 0; positionIdx < keys.size(); positionIdx++) {
+            //Only calculate moveCost for positions with crab
             int costSum = 0;
             int position = keys.get(positionIdx);
             int moveCostSum = 0;
             System.out.println("Position: " + position);
             for (int otherPositionIdx = 0; otherPositionIdx < keys.size(); otherPositionIdx++) {
                 int otherPosition = keys.get(otherPositionIdx);
-                int nbrOfCrabs = positionMap.get(otherPosition);
-//                System.out.println("Nbr of Crabs at Position: " + otherPosition + " -> " + nbrOfCrabs);
                 if (position != otherPosition) {
                     int moveCost = getCost(position, otherPosition, variableCost);
                     System.out.println(
                         "    Moving to [" + position + "]: " + otherPosition + " + -> " + position + " = " + moveCost);
+                    int nbrOfCrabs = positionMap.get(otherPosition);
+//                  System.out.println("Nbr of Crabs at Position: " + otherPosition + " -> " + nbrOfCrabs);
                     moveCostSum += nbrOfCrabs * moveCost;
                 }
             }
@@ -67,6 +78,18 @@ public class FuelCounter {
         }
         System.out.println("costMap Created" + Arrays.toString(costMap.entrySet().toArray()));
         return costMap;
+    }
+
+    private static ArrayList<Integer> getAllElementsFromKeys(HashMap<Integer, Integer> map) {
+        ArrayList<Integer> elements = new ArrayList<Integer>();
+        ArrayList<Integer> keys = new ArrayList<Integer>(map.keySet());
+        Collections.sort(keys);
+//        System.out.println("Sorted keys: " + Arrays.toString(keys.toArray()));
+        for (int i = keys.get(0); i < keys.get(keys.size() - 1) + 1; i++) {
+            elements.add(i);
+        }
+        System.out.println("Elements: " + Arrays.toString(elements.toArray()));
+        return elements;
     }
 
     private static int getCost(int position, int otherPosition, boolean variableCost) {
@@ -79,10 +102,12 @@ public class FuelCounter {
     }
 
     private static int getVariableCost(int distance) {
+//        System.out.println("Distance: " + distance);
         int costSum = 0;
         for (int i = 1; i < distance + 1; i++) {
             costSum += i;
         }
+//        System.out.println("Sum: " + costSum);
         return costSum;
     }
 
