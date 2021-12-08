@@ -18,6 +18,8 @@ Table of contents
         Given a set of input signals, determine how many times certain digits appear.
 
     2.2 Day 8-2
+        Given a set of input signals, determine the sum of the output values.
+
 
 3. Example:
         3.1 Day 8-1
@@ -105,6 +107,40 @@ Table of contents
                 Ans: 26 numbers with unique number of segments appear.
 
     3.2 Day 8-2
+        Input:
+            be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb |
+            fdgacbe cefdb cefbgd gcbe
+            edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec |
+            fcgedb cgb dgebacf gc
+            fgaebd cg bdaec gdafb agbcfd gdcbef bgcad gfac gcb cdgabef |
+            cg cg fdcagb cbg
+            fbegcd cbd adcefb dageb afcb bc aefdc ecdab fgdeca fcdbega |
+            efabcd cedba gadfec cb
+            aecbfdg fbg gf bafeg dbefa fcge gcbea fcaegb dgceab fcbdga |
+            gecf egdcabf bgf bfgea
+            fgeab ca afcebg bdacfeg cfaedg gcfdb baec bfadeg bafgc acf |
+            gebdcfa ecba ca fadegcb
+            dbcfg fgd bdegcaf fgec aegbdf ecdfab fbedc dacgb gdcebf gf |
+            cefg dcbef fcge gbcadfe
+            bdfegc cbegaf gecbf dfcage bdacg ed bedf ced adcbefg gebcd |
+            ed bcgafe cdgba cbgef
+            egadfb cdbfeg cegd fecab cgb gbdefca cg fgcdab egfdb bfceg |
+            gbdfcae bgc cg cgb
+            gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc |
+            fgae cfgab fg bagce
+
+            fdgacbe cefdb cefbgd gcbe:  8394
+            fcgedb cgb dgebacf gc:      9781
+            cg cg fdcagb cbg:           1197
+            efabcd cedba gadfec cb:     9361
+            gecf egdcabf bgf bfgea:     4873
+            gebdcfa ecba ca fadegcb:    8418
+            cefg dcbef fcge gbcadfe:    4548
+            ed bcgafe cdgba cbgef:      1625
+            gbdfcae bgc cg cgb:         8717
+            fgae cfgab fg bagce:        4315
+
+            Ans: Output sum: 61229
 
 4. Run the program
     cd AoC_2021_Day_8
