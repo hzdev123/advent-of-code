@@ -21,9 +21,64 @@ Table of contents
 
 3. Example:
         3.1 Day 8-1
-            Input:
-                acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab |
-                cdfeb fcadb cdfeb cdbaf
+            Segment description
+                  0:      1:      2:      3:      4:       5:      6:      7:      8:      9:
+                 aaaa    ....    aaaa    aaaa    ....    aaaa    aaaa    aaaa    aaaa    aaaa
+                b    c  .    c  .    c  .    c  b    c  b    .  b    .  .    c  b    c  b    c
+                b    c  .    c  .    c  .    c  b    c  b    .  b    .  .    c  b    c  b    c
+                 ....    ....    dddd    dddd    dddd    dddd    dddd    ....    dddd    dddd
+                e    f  .    f  e    .  .    f  .    f.      f  e    f  .    f  e    f  .    f
+                e    f  .    f  e    .  .    f  .    f.      f  e    f  .    f  e    f  .    f
+                 gggg    ....    gggg    gggg    ....    gggg    gggg    ....    gggg    gggg
+
+
+            Digit:  Code:       Size:   Unique size:
+                0:      abc-efg     6       No:  6
+                1:      --c--f-     2       Yes: 2
+                2:      a-cde-g     5       No:  5
+                3:      a-cd-fg     5       No:  5
+                4:      -b-cd-f-    4       Yes: 4
+                5:      ab-d-fg     5       No:  5
+                6:      ab-defg     6       No:  6
+                7:      a-c--f-     3       Yes: 3
+                8:      abcdefg     7       Yes: 7
+                9:      abcd-fg     6       No:  6
+
+            Unique top:
+                1:      --c--f-     2       Yes: 2
+                7:      a-c--f-     3       Yes: 3
+                4:      -b-cd-f-    4       Yes: 4
+                8:      abcdefg     7       Yes: 7
+                2:      a-cde-g     5       No:  5
+                3:      a-cd-fg     5       No:  5
+                5:      ab-d-fg     5       No:  5
+                0:      abc-efg     6       No:  6
+                6:      ab-defg     6       No:  6
+                9:      abcd-fg     6       No:  6
+
+            Sorted by size:
+                1:      --c--f-     2       Yes: 2
+                7:      a-c--f-     3       Yes: 3
+                4:      -b-cd-f-    4       Yes: 4
+                2:      a-cde-g     5       No:  5
+                3:      a-cd-fg     5       No:  5
+                5:      ab-d-fg     5       No:  5
+                0:      abc-efg     6       No:  6
+                6:      ab-defg     6       No:  6
+                9:      abcd-fg     6       No:  6
+                8:      abcdefg     7       Yes: 7
+
+            No padding:
+                1:      cf          2       Yes: 2
+                7:      acf         3       Yes: 3
+                4:      bcdf        4       Yes: 4
+                2:      acdeg       5       No:  5
+                3:      acdfg       5       No:  5
+                5:      abdfg       5       No:  5
+                0:      abcefg      6       No:  6
+                6:      abdefg      6       No:  6
+                9:      abcdfg      6       No:  6
+                8:      abcdefg     7       Yes: 7
 
             Input:
                 be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb |
