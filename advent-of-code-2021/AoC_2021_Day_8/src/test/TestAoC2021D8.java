@@ -3,7 +3,7 @@ package test;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import main.FuelCounter;
+import main.NumberCounter;
 
 public class TestAoC2021D8 {
 
@@ -22,21 +22,21 @@ public class TestAoC2021D8 {
 
     @Test
     private static void testDay81Example(String filePath) {
-        assertEquals(37, FuelCounter.getLowestCost(filePath, false));
+        assertEquals(26, NumberCounter.countUnique(filePath));
     }
 
     @Test
     private static void testDay81Task(String filePath) {
-        assertEquals(357353, FuelCounter.getLowestCost(filePath, false));
+        assertEquals(-1, NumberCounter.countUnique(filePath));
     }
 
     @Test
     private static void testDay82Example(String filePath) {
-        assertEquals(168, FuelCounter.getLowestCost(filePath, true));
+        assertEquals(-1, NumberCounter.countUnique(filePath));
     }
 
     @Test
     private static void testDay82Task(String filePath) {
-        assertEquals(104822130, FuelCounter.getLowestCost(filePath, true));
+        assertEquals(-1, NumberCounter.countUnique(filePath));
     }
 }
