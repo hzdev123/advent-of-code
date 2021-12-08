@@ -39,7 +39,7 @@ public class FuelCounter {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return Integer.valueOf(-1);
+        return -1;
     }
 
     private static HashMap<Integer, Integer> getCostMap(HashMap<Integer, Integer> positionMap, boolean variableCost) {
