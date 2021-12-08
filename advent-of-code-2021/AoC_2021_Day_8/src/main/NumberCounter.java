@@ -68,7 +68,7 @@ public class NumberCounter {
 //        0 - has 3-acf   common with 7
 //        6 - has 2-af    common with 7
 //        9 - has 5-abcdf common with 7 + 4
-        ArrayList<String> tenDgts = getTenDigitsList(tenDigits);
+        ArrayList<TreeSet<Character>> tenDgts = getTenDigitsList(tenDigits);
         ArrayList<TreeSet<Character>> fourDgts = getFourDigitsList(fourDigits);
 //        System.out.println("     " + Arrays.toString(tenDgts.toArray()) + " | " + Arrays.toString(fourDgts.toArray()));
         int outputSum = 0;
@@ -78,22 +78,21 @@ public class NumberCounter {
             if (nbrOfDecrypted == 4) {
                 break;
             }
-            String encryptedDigit = tenDgts.get(tenListIdx);
-            TreeSet<Character> encryptedSet = toSet(encryptedDigit);
+            TreeSet<Character> encryptedSet = tenDgts.get(tenListIdx);
             //Determine digit
-            if (encryptedDigit.length() == 2) {
+            if (encryptedSet.size() == 2) {
                 digitMap.put(1, encryptedSet);
                 outputSum = accumulateIfContains(encryptedSet, fourDgts, 1, outputSum);
-            } else if (encryptedDigit.length() == 3) {
+            } else if (encryptedSet.size() == 3) {
                 digitMap.put(7, encryptedSet);
                 outputSum = accumulateIfContains(encryptedSet, fourDgts, 7, outputSum);
-            } else if (encryptedDigit.length() == 4) {
+            } else if (encryptedSet.size() == 4) {
                 digitMap.put(4, encryptedSet);
                 outputSum = accumulateIfContains(encryptedSet, fourDgts, 4, outputSum);
-            } else if (encryptedDigit.length() == 7) {
+            } else if (encryptedSet.size() == 7) {
                 digitMap.put(8, encryptedSet);
                 outputSum = accumulateIfContains(encryptedSet, fourDgts, 8, outputSum);
-            } else if (encryptedDigit.length() == 5) {
+            } else if (encryptedSet.size() == 5) {
                 TreeSet<Character> interSeven = new TreeSet<Character>();
                 interSeven.addAll(digitMap.get(7));
                 interSeven.retainAll(encryptedSet);
@@ -116,7 +115,7 @@ public class NumberCounter {
                             + interSevenFour.size());
                     }
                 }
-            } else if (encryptedDigit.length() == 6) {
+            } else if (encryptedSet.size() == 6) {
                 TreeSet<Character> sevenSet = digitMap.get(7);
                 TreeSet<Character> interSeven = new TreeSet<Character>();
                 interSeven.addAll(digitMap.get(7));
@@ -142,7 +141,7 @@ public class NumberCounter {
                 }
             } else {
                 System.out.println("Outer Impossible: encryptedDigit length: "
-                    + encryptedDigit.length());
+                    + encryptedSet.size());
             }
 
         }
@@ -168,7 +167,7 @@ public class NumberCounter {
         return set;
     }
 
-    private static ArrayList<String> getTenDigitsList(String[] tenDigits) {
+    private static ArrayList<TreeSet<Character>> getTenDigitsList(String[] tenDigits) {
         ArrayList<String> tenDgts = new ArrayList<String>();
         Collections.addAll(tenDgts, tenDigits);
         Collections.sort(tenDgts, new Comparator<String>() {
@@ -177,7 +176,11 @@ public class NumberCounter {
                 return o1.length() - o2.length();
             }
         });
-        return tenDgts;
+        ArrayList<TreeSet<Character>> tenSetDgts = new ArrayList<TreeSet<Character>>();
+        for (int i = 0; i < tenDgts.size(); i++) {
+            tenSetDgts.add(toSet(tenDgts.get(i)));
+        }
+        return tenSetDgts;
     }
 
     private static ArrayList<TreeSet<Character>> getFourDigitsList(String[] fourDigits) {
