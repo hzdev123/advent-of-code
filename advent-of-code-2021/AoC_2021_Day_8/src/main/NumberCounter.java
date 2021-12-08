@@ -26,10 +26,18 @@ public class NumberCounter {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = "";
             HashMap<Integer, Integer> positionMap = null;
+            int uniqueSum = 0;
             while ((line = br.readLine()) != null) {
-                System.out.println("LINE: " + line);
+//                System.out.println("LINE: " + line);
+                String[] fourDigit = line.split("\\|")[1].trim().split(" ");
+                for (int digitIdx = 0; digitIdx < 4; digitIdx++) {
+//                    System.out.println("    DIGIT["+digitIdx+"]   : " + fourDigit[digitIdx]);
+                    if (uniqueSegmentSize(fourDigit[digitIdx].length())) {
+                        uniqueSum++;
+                    }
+                }
             }
-            return -1;
+            return uniqueSum;
         } catch (FileNotFoundException e) {
             System.err.println("File not found: " + filePath);
             e.printStackTrace();
@@ -37,5 +45,12 @@ public class NumberCounter {
             e.printStackTrace();
         }
         return Integer.valueOf(-1);
+    }
+
+    private static boolean uniqueSegmentSize(int segmentSize) {
+        return segmentSize == 2
+            || segmentSize == 3
+            || segmentSize == 4
+            || segmentSize == 7;
     }
 }
