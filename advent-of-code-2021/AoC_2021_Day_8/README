@@ -129,6 +129,58 @@ Table of contents
             gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc |
             fgae cfgab fg bagce
 
+            Get mapping:
+                length
+                      2        3         4       7
+                     ....     aaaa     ....     aaaa
+                    .    c   .    c   b    c   b    c
+                    .    c   .    c   b    c   b    c
+                     ....     ....     dddd     dddd
+                    .    f   .    f   .    f   e    f
+                    .    f   .    f   .    f   e    f
+                     ....     ....     ....     gggg
+
+                length = 5
+                     aaaa     aaaa     aaaa
+                    .    c   .    c   b    .
+                    .    c   .    c   b    .
+                     dddd     dddd     dddd
+                    e    .   .    f   .    f
+                    e    .   .    f   .    f
+                     gggg     gggg     gggg
+
+                        2 - has 3-acd  common with 7 + 4
+                        3 - has 3-acf  common with 7
+                        5 - has 4-abdf common with 7 + 4
+
+                length = 6
+                     aaaa     aaaa     aaaa
+                    b    c   b    .   b    c
+                    b    c   b    .   b    c
+                     ....     dddd     dddd
+                    e    f   e    f   .    f
+                    e    f   e    f   .    f
+                     gggg     gggg     gggg
+
+                        0 - has 4-acf   common with 7 + 4
+                        6 - has 2-af    common with 7
+                        9 - has 5-abcdf common with 7 + 4
+
+
+                    //        1 - lenght 2
+                    //        7 - lenght 3
+                    //        4 - lenght 4
+                    //        8 - lenght 7
+                    //    length = 5
+                    //        2 - has 3-acd  common with 3 + 4
+                    //        3 - has 2-cf   common with 1
+                    //        5 - has 4-abdf common with 3 + 4
+                    //    length = 6
+                    //        0 - has 3-acf   common with 7
+                    //        6 - has 2-af    common with 7
+                    //        9 - has 5-abcdf common with 7 + 4
+
+
             fdgacbe cefdb cefbgd gcbe:  8394
             fcgedb cgb dgebacf gc:      9781
             cg cg fdcagb cbg:           1197
