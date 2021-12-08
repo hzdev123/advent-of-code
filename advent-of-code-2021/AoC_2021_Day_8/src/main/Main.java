@@ -14,7 +14,7 @@ public class Main {
         System.out.println("Advent of code 2021 day 8-1 solved: "
             + NumberCounter.countUnique(TASK_FILE_PATH));
         System.out.println("Advent of code 2021 day 8-2 solved: "
-            + NumberCounter.countUnique(TASK_FILE_PATH));
+            + NumberCounter.countOutputSum(TASK_FILE_PATH));
         System.exit(0);
     }
 }

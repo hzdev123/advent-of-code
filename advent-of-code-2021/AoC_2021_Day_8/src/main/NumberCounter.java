@@ -18,11 +18,30 @@ import java.util.HashMap;
 public class NumberCounter {
 
     /**
+     * Count the sum of four digits output
+     * @param filePath Path to input data file.
+     * @return int the sum of four digits output
+     */
+    public static int countOutputSum(String filePath) {
+        ArrayList<String[]> fourDigits = getFourDigits(filePath);
+        return getFourDigitsSum(fourDigits);
+    }
+
+    /**
      * Count the occurrence of numbers with unique number of segments
      * @param filePath Path to input data file.
      * @return int numbers with unique number of segments
      */
     public static int countUnique(String filePath) {
+        ArrayList<String[]> fourDigits = getFourDigits(filePath);
+        return getUniqueSegmentDigitAmount(fourDigits);
+    }
+
+    private static int getFourDigitsSum(ArrayList<String[]> fourDigits) {
+        return -1;
+    }
+
+    private static ArrayList<String[]> getFourDigits(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = "";
             HashMap<Integer, Integer> positionMap = null;
@@ -32,14 +51,14 @@ public class NumberCounter {
                 String[] fourDigit = line.split("\\|")[1].trim().split(" ");
                 fourDigits.add(fourDigit);
             }
-            return getUniqueSegmentDigitAmount(fourDigits);
+            return fourDigits;
         } catch (FileNotFoundException e) {
             System.err.println("File not found: " + filePath);
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return -1;
+        return null;
     }
 
     private static int getUniqueSegmentDigitAmount(ArrayList<String[]> fourDigits) {
