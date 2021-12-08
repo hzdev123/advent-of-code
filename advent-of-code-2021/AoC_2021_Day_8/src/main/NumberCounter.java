@@ -26,25 +26,34 @@ public class NumberCounter {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = "";
             HashMap<Integer, Integer> positionMap = null;
-            int uniqueSum = 0;
+            ArrayList<String[]> fourDigits = new ArrayList<String[]>();
             while ((line = br.readLine()) != null) {
 //                System.out.println("LINE: " + line);
                 String[] fourDigit = line.split("\\|")[1].trim().split(" ");
-                for (int digitIdx = 0; digitIdx < 4; digitIdx++) {
-//                    System.out.println("    DIGIT["+digitIdx+"]   : " + fourDigit[digitIdx]);
-                    if (uniqueSegmentSize(fourDigit[digitIdx].length())) {
-                        uniqueSum++;
-                    }
-                }
+                fourDigits.add(fourDigit);
             }
-            return uniqueSum;
+            return getUniqueSegmentDigitAmount(fourDigits);
         } catch (FileNotFoundException e) {
             System.err.println("File not found: " + filePath);
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return Integer.valueOf(-1);
+        return -1;
+    }
+
+    private static int getUniqueSegmentDigitAmount(ArrayList<String[]> fourDigits) {
+        int uniqueSum = 0;
+        for (int listIdx = 0; listIdx < fourDigits.size(); listIdx++) {
+            String[] fourDigit = fourDigits.get(listIdx);
+            for (int digitIdx = 0; digitIdx < 4; digitIdx++) {
+//                System.out.println("    DIGIT["+digitIdx+"]   : " + fourDigit[digitIdx]);
+                if (uniqueSegmentSize(fourDigit[digitIdx].length())) {
+                    uniqueSum++;
+                }
+            }
+        }
+        return uniqueSum;
     }
 
     private static boolean uniqueSegmentSize(int segmentSize) {

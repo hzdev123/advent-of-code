@@ -32,7 +32,7 @@ public class TestAoC2021D8 {
 
     @Test
     private static void testDay82Example(String filePath) {
-        assertEquals(-1, NumberCounter.countUnique(filePath));
+        assertEquals(61229, NumberCounter.countUnique(filePath));
     }
 
     @Test
