@@ -25,19 +25,29 @@ public class RiskCalculator {
      * @return int the sum of risk levels
      */
     public static int getSum(String filePath) {
+        ArrayList<Integer> digits = getMapAsList(filePath);
+        System.out.println("LINE2: " + Arrays.toString(digits.toArray()));
+        return -1;
+    }
+
+    private static ArrayList<Integer> getMapAsList(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = "";
-            int riskLevelSum = 0;
+            ArrayList<Integer> mapAsList = new ArrayList<Integer>();
             while ((line = br.readLine()) != null) {
                 System.out.println("LINE: " + line);
+                String[] digits = line.split("");
+                for (int digitIdx = 0; digitIdx < digits.length; digitIdx++) {
+                    mapAsList.add(Integer.parseInt(digits[digitIdx]));
+                }
             }
-            return riskLevelSum;
+            return mapAsList;
         } catch (FileNotFoundException e) {
             System.err.println("File not found: " + filePath);
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return -1;
+        return null;
     }
 }
