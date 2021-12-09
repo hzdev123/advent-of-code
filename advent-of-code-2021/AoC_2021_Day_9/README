@@ -15,12 +15,28 @@ Table of contents
 
 2. Summary:
     2.1 Day 9-1
+        Given a heightmap, find the risk level which is base on the low points.
 
     2.2 Day 9-2
 
 3. Example:
     3.1 Day 9-1
-    
+        Input:
+            2199943210
+            3987894921
+            9856789892
+            8767896789
+            9899965678
+
+        Lowest digit surrounded by space
+            2 1 9994321 0
+            3987894921
+            98 5 6789892
+            8767896789
+            989996 5 678
+
+        Ans: 2 + 1 + 6 + 6 = 15
+
     3.2 Day 9-2
 
 4. Run the program

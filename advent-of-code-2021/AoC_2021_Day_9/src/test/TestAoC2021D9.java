@@ -3,7 +3,7 @@ package test;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import main.NumberCounter;
+import main.RiskCalculator;
 
 public class TestAoC2021D9 {
 
@@ -22,21 +22,21 @@ public class TestAoC2021D9 {
 
     @Test
     private static void testDay91Example(String filePath) {
-        assertEquals(-1, NumberCounter.countUnique(filePath));
+        assertEquals(15, RiskCalculator.getSum(filePath));
     }
 
     @Test
     private static void testDay91Task(String filePath) {
-        assertEquals(-1, NumberCounter.countUnique(filePath));
+        assertEquals(-1, RiskCalculator.getSum(filePath));
     }
 
     @Test
     private static void testDay92Example(String filePath) {
-        assertEquals(-1, NumberCounter.countOutputSum(filePath));
+        assertEquals(-1, RiskCalculator.getSum(filePath));
     }
 
     @Test
     private static void testDay92Task(String filePath) {
-        assertEquals(-1, NumberCounter.countOutputSum(filePath));
+        assertEquals(-1, RiskCalculator.getSum(filePath));
     }
 }
