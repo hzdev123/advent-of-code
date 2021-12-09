@@ -7,10 +7,7 @@ import java.io.IOException;
 
 import java.util.Arrays;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.TreeSet;
+import java.util.TreeMap;
 
 /**
  * Represents a risk calculator
@@ -29,7 +26,6 @@ public class RiskCalculator {
             //Setup the indata
             String line = "";
             int mapXlength = 0;
-            int mapYlength = 0;
             ArrayList<Integer> digits = new ArrayList<Integer>();
             while ((line = br.readLine()) != null) {
 //                System.out.println("LINE: " + line);
@@ -40,21 +36,22 @@ public class RiskCalculator {
                 for (int digitIdx = 0; digitIdx < digit.length; digitIdx++) {
                     digits.add(Integer.parseInt(digit[digitIdx]));
                 }
-                mapYlength++;
             }
 //            System.out.println("LINE2: " + Arrays.toString(digits.toArray()));
-//            System.out.println("mapXlength: " + mapXlength);
-//            System.out.println("mapYlength: " + mapYlength + "\n");
+//            System.out.println("mapYlength: " + mapXlength + "\n");
 
-            int riskLevelSum = 0;
             //Process the indata
+            int riskLevelSum = 0;
+            TreeMap<Integer, Integer> lowPointMap = new TreeMap<Integer, Integer>();
             for (int listIdx = 0; listIdx < digits.size(); listIdx++) {
                 int currentDigit = digits.get(listIdx);
                 if (isLowPoint(digits, currentDigit, listIdx, mapXlength)) {
-//                    System.out.println("lowPoint[" + (listIdx + 1) + "]: " + currentDigit + "\n");
+                    System.out.println("lowPoint[" + listIdx + "]: " + currentDigit + "\n");
+                    lowPointMap.put(listIdx, currentDigit);
                     riskLevelSum += currentDigit + 1;
                 }
             }
+            System.out.println("lowPointMap:\n    " + Arrays.toString(lowPointMap.entrySet().toArray()));
             return riskLevelSum;
         } catch (FileNotFoundException e) {
             System.err.println("File not found: " + filePath);
