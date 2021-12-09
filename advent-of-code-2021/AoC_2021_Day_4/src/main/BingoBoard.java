@@ -12,7 +12,7 @@ import java.lang.StringBuilder;
  */
 public class BingoBoard {
     List<String> nonMarkedSquares = null;
-    ArrayList<Integer> markedSquaresIndex = null;
+    List<Integer> markedSquaresIndex = null;
     List<String> squares = null;
 
     /**
@@ -81,8 +81,8 @@ public class BingoBoard {
         return unMarkedSum;
     }
 
-    private boolean checkHorizontalBingo(ArrayList<Integer> markedSquaresIndex, int index) {
-        ArrayList<Integer> horizontalIndexes = getHorizontalIndexes(index);
+    private boolean checkHorizontalBingo(List<Integer> markedSquaresIndex, int index) {
+        List<Integer> horizontalIndexes = getHorizontalIndexes(index);
         for (int checkIdxPos = 0; checkIdxPos < 5; checkIdxPos++) {
             if (!markedSquaresIndex.contains(horizontalIndexes.get(checkIdxPos))) {
                 return false;
@@ -91,8 +91,8 @@ public class BingoBoard {
         return true;
     }
 
-    private boolean checkVerticalBingo(ArrayList<Integer> markedSquaresIndex, int index) {
-        ArrayList<Integer> verticalIndexes = getVerticalIndexes(index);
+    private boolean checkVerticalBingo(List<Integer> markedSquaresIndex, int index) {
+        List<Integer> verticalIndexes = getVerticalIndexes(index);
         for (int checkIdxPos = 0; checkIdxPos < 5; checkIdxPos++) {
             if (!markedSquaresIndex.contains(verticalIndexes.get(checkIdxPos))) {
                 return false;
@@ -101,8 +101,8 @@ public class BingoBoard {
         return true;
     }
 
-    private ArrayList<Integer> getHorizontalIndexes(int index) {
-        ArrayList<Integer> horizontalIndexes = new ArrayList<Integer>();
+    private List<Integer> getHorizontalIndexes(int index) {
+        List<Integer> horizontalIndexes = new ArrayList<Integer>();
         int horizontalIndex = index - index % 5;
         for (int i = 0; i < 5; i++) {
             horizontalIndexes.add(horizontalIndex);
@@ -112,8 +112,8 @@ public class BingoBoard {
         return horizontalIndexes;
     }
 
-    private ArrayList<Integer> getVerticalIndexes(int index) {
-        ArrayList<Integer> verticalIndexes = new ArrayList<Integer>();
+    private List<Integer> getVerticalIndexes(int index) {
+        List<Integer> verticalIndexes = new ArrayList<Integer>();
         int verticalIndex = index % 5;
         for (int i = 0; i < 5; i++) {
             verticalIndexes.add(verticalIndex);

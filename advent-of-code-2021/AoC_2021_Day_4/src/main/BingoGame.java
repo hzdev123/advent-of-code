@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-
 import java.util.List;
 
 import java.lang.StringBuilder;
@@ -99,8 +98,8 @@ public class BingoGame {
         return -1;
     }
 
-    private static ArrayList<String> getMarkingNumbers(String line) {
-        ArrayList<String> markingNumbers = new ArrayList<String>();
+    private static List<String> getMarkingNumbers(String line) {
+        List<String> markingNumbers = new ArrayList<String>();
         Collections.addAll(markingNumbers, line.split(",")); 
         return markingNumbers;
     }
