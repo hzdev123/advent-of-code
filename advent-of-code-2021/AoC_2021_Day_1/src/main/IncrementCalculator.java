@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Calculator which calculates integer increments
@@ -24,7 +25,7 @@ public class IncrementCalculator {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = "";
             int prev = -1;
-            ArrayList<Integer> ints = new ArrayList<Integer>();
+            List<Integer> ints = new ArrayList<Integer>();
             while ((line = br.readLine()) != null) {
                 ints.add(Integer.parseInt(line.trim()));
             }

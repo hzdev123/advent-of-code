@@ -9,6 +9,9 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 /**
  * Represents a fuel counter
@@ -26,12 +29,12 @@ public class FuelCounter {
     public static int getLowestCost(String filePath, boolean variableCost) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = "";
-            HashMap<Integer, Integer> positionMap = null;
+            Map<Integer, Integer> positionMap = null;
             while ((line = br.readLine()) != null) {
 //                System.out.println("LINE: " + line);
                 positionMap = loadPositionMap(line);
             }
-            HashMap<Integer, Integer> costMap = getCostMap(positionMap, variableCost);
+            Map<Integer, Integer> costMap = getCostMap(positionMap, variableCost);
             return getLowestCost(costMap);
         } catch (FileNotFoundException e) {
             System.err.println("File not found: " + filePath);
@@ -42,10 +45,10 @@ public class FuelCounter {
         return -1;
     }
 
-    private static HashMap<Integer, Integer> getCostMap(HashMap<Integer, Integer> positionMap, boolean variableCost) {
-        HashMap<Integer, Integer> costMap = new HashMap<Integer, Integer>();
-        ArrayList<Integer> positionKeys = null;
-        ArrayList<Integer> crabKeys = null;
+    private static Map<Integer, Integer> getCostMap(Map<Integer, Integer> positionMap, boolean variableCost) {
+        Map<Integer, Integer> costMap = new HashMap<Integer, Integer>();
+        List<Integer> positionKeys = null;
+        List<Integer> crabKeys = null;
         if (variableCost) {
             //VariableCost true:
             //    consider keySet all elements from min to max
@@ -81,9 +84,9 @@ public class FuelCounter {
         return costMap;
     }
 
-    private static ArrayList<Integer> getAllElementsFromKeys(HashMap<Integer, Integer> map) {
-        ArrayList<Integer> elements = new ArrayList<Integer>();
-        ArrayList<Integer> keys = new ArrayList<Integer>(map.keySet());
+    private static List<Integer> getAllElementsFromKeys(Map<Integer, Integer> map) {
+        List<Integer> elements = new ArrayList<Integer>();
+        List<Integer> keys = new ArrayList<Integer>(map.keySet());
         Collections.sort(keys);
 //        System.out.println("Sorted keys: " + Arrays.toString(keys.toArray()));
         for (int i = keys.get(0); i < keys.get(keys.size() - 1) + 1; i++) {
@@ -112,11 +115,11 @@ public class FuelCounter {
         return costSum;
     }
 
-    private static ArrayList<Integer> getKeys(HashMap<Integer, Integer> map) {
+    private static List<Integer> getKeys(Map<Integer, Integer> map) {
         return new ArrayList<Integer>(map.keySet());
     }
 
-    private static int getLowestCost(HashMap<Integer, Integer> costMap) {
+    private static int getLowestCost(Map<Integer, Integer> costMap) {
         int lowestCost = Integer.MAX_VALUE;
         for (Integer position : costMap.keySet()) {
             int currentCost = costMap.get(position);
@@ -127,8 +130,8 @@ public class FuelCounter {
         return lowestCost;
     }
 
-    private static HashMap<Integer, Integer> loadPositionMap(String line) {
-        HashMap<Integer, Integer> crabs = new HashMap<Integer, Integer>();
+    private static Map<Integer, Integer> loadPositionMap(String line) {
+        Map<Integer, Integer> crabs = new HashMap<Integer, Integer>();
         String[] crabsPositions = line.split(",");
         for (int i = 0; i < crabsPositions.length; i++) {
             int crabPosition= Integer.parseInt(crabsPositions[i]);

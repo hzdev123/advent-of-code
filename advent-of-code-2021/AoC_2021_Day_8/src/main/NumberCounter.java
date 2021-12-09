@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.TreeSet;
 
 /**
@@ -25,7 +28,7 @@ public class NumberCounter {
      * @return int numbers with unique number of segments
      */
     public static int countUnique(String filePath) {
-        ArrayList<String[]> fourDigits = getFourDigits(filePath);
+        List<String[]> fourDigits = getFourDigits(filePath);
         return getUniqueSegmentDigitAmount(fourDigits);
     }
 
@@ -68,17 +71,17 @@ public class NumberCounter {
 //        0 - has 3-acf   common with 7
 //        6 - has 2-af    common with 7
 //        9 - has 5-abcdf common with 7 + 4
-        ArrayList<TreeSet<Character>> tenDgts = getTenDigitsList(tenDigits);
-        ArrayList<TreeSet<Character>> fourDgts = getFourDigitsList(fourDigits);
+        List<Set<Character>> tenDgts = getTenDigitsList(tenDigits);
+        List<Set<Character>> fourDgts = getFourDigitsList(fourDigits);
 //        System.out.println("     " + Arrays.toString(tenDgts.toArray()) + " | " + Arrays.toString(fourDgts.toArray()));
         int outputSum = 0;
         int nbrOfDecrypted = 0;
-        HashMap<Integer, TreeSet<Character>> digitMap = new HashMap<Integer, TreeSet<Character>>();
+        Map<Integer, Set<Character>> digitMap = new HashMap<Integer, Set<Character>>();
         for (int tenListIdx = 0; tenListIdx < 10; tenListIdx++) {
             if (nbrOfDecrypted == 4) {
                 break;
             }
-            TreeSet<Character> encryptedSet = tenDgts.get(tenListIdx);
+            Set<Character> encryptedSet = tenDgts.get(tenListIdx);
             //Determine digit
             if (encryptedSet.size() == 2) {
                 digitMap.put(1, encryptedSet);
@@ -93,14 +96,14 @@ public class NumberCounter {
                 digitMap.put(8, encryptedSet);
                 outputSum = accumulateIfContains(encryptedSet, fourDgts, 8, outputSum);
             } else if (encryptedSet.size() == 5) {
-                TreeSet<Character> interSeven = new TreeSet<Character>();
+                Set<Character> interSeven = new TreeSet<Character>();
                 interSeven.addAll(digitMap.get(7));
                 interSeven.retainAll(encryptedSet);
                 if (interSeven.size() == 3) {
                     digitMap.put(3, encryptedSet);
                     outputSum = accumulateIfContains(encryptedSet, fourDgts, 3, outputSum);
                 } else if(interSeven.size() == 2) {
-                    TreeSet<Character> interSevenFour = new TreeSet<Character>();
+                    Set<Character> interSevenFour = new TreeSet<Character>();
                     interSevenFour.addAll(digitMap.get(7));
                     interSevenFour.addAll(digitMap.get(4));
                     interSevenFour.retainAll(encryptedSet);
@@ -116,15 +119,15 @@ public class NumberCounter {
                     }
                 }
             } else if (encryptedSet.size() == 6) {
-                TreeSet<Character> sevenSet = digitMap.get(7);
-                TreeSet<Character> interSeven = new TreeSet<Character>();
+                Set<Character> sevenSet = digitMap.get(7);
+                Set<Character> interSeven = new TreeSet<Character>();
                 interSeven.addAll(digitMap.get(7));
                 interSeven.retainAll(encryptedSet);
                 if (interSeven.size() == 2) {
                     digitMap.put(6, encryptedSet);
                     outputSum = accumulateIfContains(encryptedSet, fourDgts, 6, outputSum);
                 } else if(interSeven.size() == 3) {
-                    TreeSet<Character> interSevenFour = new TreeSet<Character>();
+                    Set<Character> interSevenFour = new TreeSet<Character>();
                     interSevenFour.addAll(digitMap.get(7));
                     interSevenFour.addAll(digitMap.get(4));
                     interSevenFour.retainAll(encryptedSet);
@@ -150,7 +153,7 @@ public class NumberCounter {
         return outputSum;
     }
 
-    private static int accumulateIfContains(TreeSet<Character> encryptedSet, ArrayList<TreeSet<Character>> fourDgts, int decryptedNumber, int outputSum) {
+    private static int accumulateIfContains(Set<Character> encryptedSet, List<Set<Character>> fourDgts, int decryptedNumber, int outputSum) {
         for (int fourDigitIdx = 0; fourDigitIdx < 4; fourDigitIdx++) {
             if (fourDgts.get(fourDigitIdx).equals(encryptedSet)) {
                 outputSum += decryptedNumber * (int) Math.pow(10, 3 - fourDigitIdx);
@@ -159,16 +162,16 @@ public class NumberCounter {
         return outputSum;
     }
 
-    private static TreeSet<Character> toSet(String digit) {
-        TreeSet<Character> set = new TreeSet<Character>();
+    private static Set<Character> toSet(String digit) {
+        Set<Character> set = new TreeSet<Character>();
         for(char c : digit.toCharArray()) {
             set.add(c);
         }
         return set;
     }
 
-    private static ArrayList<TreeSet<Character>> getTenDigitsList(String[] tenDigits) {
-        ArrayList<String> tenDgts = new ArrayList<String>();
+    private static List<Set<Character>> getTenDigitsList(String[] tenDigits) {
+        List<String> tenDgts = new ArrayList<String>();
         Collections.addAll(tenDgts, tenDigits);
         Collections.sort(tenDgts, new Comparator<String>() {
             @Override
@@ -176,27 +179,27 @@ public class NumberCounter {
                 return o1.length() - o2.length();
             }
         });
-        ArrayList<TreeSet<Character>> tenSetDgts = new ArrayList<TreeSet<Character>>();
+        List<Set<Character>> tenSetDgts = new ArrayList<Set<Character>>();
         for (int i = 0; i < tenDgts.size(); i++) {
             tenSetDgts.add(toSet(tenDgts.get(i)));
         }
         return tenSetDgts;
     }
 
-    private static ArrayList<TreeSet<Character>> getFourDigitsList(String[] fourDigits) {
-        ArrayList<TreeSet<Character>> fourDgts = new ArrayList<TreeSet<Character>>();
+    private static List<Set<Character>> getFourDigitsList(String[] fourDigits) {
+        List<Set<Character>> fourDgts = new ArrayList<Set<Character>>();
         for (int i = 0; i < fourDigits.length; i++) {
-            TreeSet<Character> fourDigitSet = toSet(fourDigits[i]);
+            Set<Character> fourDigitSet = toSet(fourDigits[i]);
             fourDgts.add(fourDigitSet);
         }
         return fourDgts;
     }
 
-    private static ArrayList<String[]> getFourDigits(String filePath) {
+    private static List<String[]> getFourDigits(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = "";
-            HashMap<Integer, Integer> positionMap = null;
-            ArrayList<String[]> fourDigits = new ArrayList<String[]>();
+            Map<Integer, Integer> positionMap = null;
+            List<String[]> fourDigits = new ArrayList<String[]>();
             while ((line = br.readLine()) != null) {
 //                System.out.println("LINE: " + line);
                 String[] fourDigit = line.split("\\|")[1].trim().split(" ");
@@ -212,7 +215,7 @@ public class NumberCounter {
         return null;
     }
 
-    private static int getUniqueSegmentDigitAmount(ArrayList<String[]> fourDigits) {
+    private static int getUniqueSegmentDigitAmount(List<String[]> fourDigits) {
         int uniqueSum = 0;
         for (int listIdx = 0; listIdx < fourDigits.size(); listIdx++) {
             String[] fourDigit = fourDigits.get(listIdx);

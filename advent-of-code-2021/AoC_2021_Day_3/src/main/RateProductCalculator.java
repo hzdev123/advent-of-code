@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.lang.StringBuilder;
 
 /**
@@ -22,7 +23,7 @@ public class RateProductCalculator {
     public static int getPowerConsumption(String filePath){
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = "";
-            ArrayList<String> digits = new ArrayList<String>();
+            List<String> digits = new ArrayList<String>();
             int digitsLenght = 0;
             while ((line = br.readLine()) != null) {
                 String[] lineSplit = line.split("");
@@ -49,7 +50,7 @@ public class RateProductCalculator {
     public static int getLifeSupport(String filePath){
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = "";
-            ArrayList<String> digits = new ArrayList<String>();
+            List<String> digits = new ArrayList<String>();
             int digitsLenght = 0;
             while ((line = br.readLine()) != null) {
                 String[] lineSplit = line.split("");
@@ -58,7 +59,7 @@ public class RateProductCalculator {
                     digits.add(lineSplit[i]);
                 }
             }
-            ArrayList<String> digitsCopy = new ArrayList<String>();
+            List<String> digitsCopy = new ArrayList<String>();
             digitsCopy.addAll(digits);
             int O2 = getO2GeneratorRate(digits, digitsLenght);
             int CO2 = getCO2ScrubberRate(digitsCopy, digitsLenght);
@@ -76,9 +77,9 @@ public class RateProductCalculator {
 
     //TODO: Once getO2GeneratorRate and getCO2ScrubberRate solves TASK_FILE_PATH,
     //      refactor into one method.
-    private static int getO2GeneratorRate(ArrayList<String> digits, int sequenceSize) {
-        ArrayList<Integer> zerosIndexInDigits = new ArrayList<Integer>();
-        ArrayList<Integer> onesIndexInDigits = new ArrayList<Integer>();
+    private static int getO2GeneratorRate(List<String> digits, int sequenceSize) {
+        List<Integer> zerosIndexInDigits = new ArrayList<Integer>();
+        List<Integer> onesIndexInDigits = new ArrayList<Integer>();
         for (int currentBit = 0; currentBit < sequenceSize; currentBit++) {
             StringBuilder xc = new StringBuilder();
             for (int b = 0; b < digits.size(); b++) {
@@ -154,9 +155,9 @@ public class RateProductCalculator {
 
     //TODO: Once getO2GeneratorRate and getCO2ScrubberRate solves TASK_FILE_PATH,
     //      refactor into one method.
-    private static int getCO2ScrubberRate(ArrayList<String> digits, int sequenceSize) {
-        ArrayList<Integer> zerosIndexInDigits = new ArrayList<Integer>();
-        ArrayList<Integer> onesIndexInDigits = new ArrayList<Integer>();
+    private static int getCO2ScrubberRate(List<String> digits, int sequenceSize) {
+        List<Integer> zerosIndexInDigits = new ArrayList<Integer>();
+        List<Integer> onesIndexInDigits = new ArrayList<Integer>();
         for (int currentBit = 0; currentBit < sequenceSize; currentBit++) {
             StringBuilder xc = new StringBuilder();
             for (int b = 0; b < digits.size(); b++) {
@@ -229,7 +230,7 @@ public class RateProductCalculator {
         return -1;
     }
 
-    private static int getEpsilonGammaProduct(ArrayList<String> digits, int sequenceSize) {
+    private static int getEpsilonGammaProduct(List<String> digits, int sequenceSize) {
         StringBuilder gammaRate = new StringBuilder();
         for (int i = 0; i < sequenceSize; i++) {
             int zero = 0;
