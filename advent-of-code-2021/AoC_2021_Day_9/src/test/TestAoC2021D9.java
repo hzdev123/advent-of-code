@@ -39,6 +39,6 @@ public class TestAoC2021D9 {
 
     @Test
     private static void testDay92Task(String filePath, RiskCalculator rc) {
-        assertEquals(-1, rc.getBasinProduct(filePath));
+        assertEquals(1168440, rc.getBasinProduct(filePath));
     }
 }
