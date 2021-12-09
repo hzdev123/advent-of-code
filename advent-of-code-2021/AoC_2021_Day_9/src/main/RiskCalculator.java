@@ -25,29 +25,38 @@ public class RiskCalculator {
      * @return int the sum of risk levels
      */
     public static int getSum(String filePath) {
-        ArrayList<Integer> digits = getMapAsList(filePath);
-        System.out.println("LINE2: " + Arrays.toString(digits.toArray()));
-        return -1;
-    }
-
-    private static ArrayList<Integer> getMapAsList(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            //Setup the indata
+            int riskLevelSum = 0;
             String line = "";
+            int mapLength = 0;
+            int mapHeight = 0;
             ArrayList<Integer> mapAsList = new ArrayList<Integer>();
             while ((line = br.readLine()) != null) {
                 System.out.println("LINE: " + line);
-                String[] digits = line.split("");
-                for (int digitIdx = 0; digitIdx < digits.length; digitIdx++) {
-                    mapAsList.add(Integer.parseInt(digits[digitIdx]));
+                String[] digit = line.split("");
+                if (mapLength == 0) {
+                    mapLength = digit.length;
                 }
+                for (int digitIdx = 0; digitIdx < digit.length; digitIdx++) {
+                    mapAsList.add(Integer.parseInt(digit[digitIdx]));
+                }
+                mapHeight++;
             }
-            return mapAsList;
+            System.out.println("LINE2: " + Arrays.toString(mapAsList.toArray()));
+            System.out.println("mapLength: " + mapLength);
+            System.out.println("mapHeight: " + mapHeight);
+
+            //Process the indata
+
+
+            return riskLevelSum;
         } catch (FileNotFoundException e) {
             System.err.println("File not found: " + filePath);
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return -1;
     }
 }
