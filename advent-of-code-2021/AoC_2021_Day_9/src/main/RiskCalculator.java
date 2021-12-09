@@ -15,6 +15,7 @@ import java.util.TreeMap;
  *
  */
 public class RiskCalculator {
+    private int mapXlength = -1;
 
     /**
      * Gives the product of the three largest basin size
@@ -23,11 +24,11 @@ public class RiskCalculator {
      */
     public static int getBasinProduct(String filePath) {
         int basinProduct = 0;
-        TreeMap<Integer, ArrayList<Integer>> lowPointMap = getLowPointMap(filePath);
-        ArrayList<Integer> digits = lowPointMap.get(lowPointMap.firstKey());
-        for (int lowPointMapIdx : lowPointMap.keySet()) {
-            int lowPointValue = digits.get(lowPointMapIdx);
-        }
+//        TreeMap<Integer, Integer> lowPointMap = getLowPointMap(filePath);
+//        for (int lowPointMapIdx : lowPointMap.keySet()) {
+//            int lowPointValue = digits.get(lowPointMapIdx);
+////            checkAdjacent(lowPointMapIdx, digits);
+//        }
         return basinProduct;
     }
 
@@ -38,15 +39,14 @@ public class RiskCalculator {
      */
     public static int getSum(String filePath) {
         int riskLevelSum = 0;
-        TreeMap<Integer, ArrayList<Integer>> lowPointMap = getLowPointMap(filePath);
-        ArrayList<Integer> digits = lowPointMap.get(lowPointMap.firstKey());
+        TreeMap<Integer, Integer> lowPointMap = getLowPointMap(filePath);
         for (int lowPointMapIdx : lowPointMap.keySet()) {
-            riskLevelSum += digits.get(lowPointMapIdx) + 1;
+            riskLevelSum += lowPointMap.get(lowPointMapIdx);
         }
         return riskLevelSum;
     }
 
-    private static TreeMap<Integer, ArrayList<Integer>> getLowPointMap(String filePath) {
+    private static TreeMap<Integer, Integer> getLowPointMap(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             //Setup the indata
             String line = "";
@@ -66,12 +66,12 @@ public class RiskCalculator {
 //            System.out.println("mapYlength: " + mapXlength + "\n");
 
             //Process the indata
-            TreeMap<Integer, ArrayList<Integer>> lowPointMap = new TreeMap<Integer, ArrayList<Integer>>();
+            TreeMap<Integer, Integer> lowPointMap = new TreeMap<Integer, Integer>();
             for (int listIdx = 0; listIdx < digits.size(); listIdx++) {
                 int currentDigit = digits.get(listIdx);
                 if (isLowPoint(digits, currentDigit, listIdx, mapXlength)) {
                     System.out.println("lowPoint[" + listIdx + "]: " + currentDigit + "\n");
-                    lowPointMap.put(listIdx, digits);
+                    lowPointMap.put(listIdx, currentDigit + 1);
                 }
             }
             return lowPointMap;
