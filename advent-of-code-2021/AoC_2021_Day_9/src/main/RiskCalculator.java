@@ -16,12 +16,22 @@ import java.util.TreeMap;
  */
 public class RiskCalculator {
 
+
     /**
      * Gives the sum of risk levels based on height map
      * @param filePath Path to input data file.
      * @return int the sum of risk levels
      */
     public static int getSum(String filePath) {
+        int riskLevelSum = 0;
+        TreeMap<Integer, Integer> lowPointMap = getLowPointMap(filePath);
+        for (int lowPointMapIdx : lowPointMap.keySet()) {
+            riskLevelSum += lowPointMap.get(lowPointMapIdx) + 1;
+        }
+        return riskLevelSum;
+    }
+
+    private static TreeMap<Integer, Integer> getLowPointMap(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             //Setup the indata
             String line = "";
@@ -41,25 +51,22 @@ public class RiskCalculator {
 //            System.out.println("mapYlength: " + mapXlength + "\n");
 
             //Process the indata
-            int riskLevelSum = 0;
             TreeMap<Integer, Integer> lowPointMap = new TreeMap<Integer, Integer>();
             for (int listIdx = 0; listIdx < digits.size(); listIdx++) {
                 int currentDigit = digits.get(listIdx);
                 if (isLowPoint(digits, currentDigit, listIdx, mapXlength)) {
                     System.out.println("lowPoint[" + listIdx + "]: " + currentDigit + "\n");
                     lowPointMap.put(listIdx, currentDigit);
-                    riskLevelSum += currentDigit + 1;
                 }
             }
-            System.out.println("lowPointMap:\n    " + Arrays.toString(lowPointMap.entrySet().toArray()));
-            return riskLevelSum;
+            return lowPointMap;
         } catch (FileNotFoundException e) {
             System.err.println("File not found: " + filePath);
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return -1;
+        return null;
     }
 
     private static int getAboveDigit(ArrayList<Integer> digits, int listIdx, int mapXlength) {
