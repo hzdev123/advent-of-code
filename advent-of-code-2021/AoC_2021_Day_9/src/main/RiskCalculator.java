@@ -29,27 +29,31 @@ public class RiskCalculator {
             //Setup the indata
             int riskLevelSum = 0;
             String line = "";
-            int mapLength = 0;
-            int mapHeight = 0;
-            ArrayList<Integer> mapAsList = new ArrayList<Integer>();
+            int mapXlength = 0;
+            int mapYlength = 0;
+            ArrayList<Integer> digits = new ArrayList<Integer>();
             while ((line = br.readLine()) != null) {
                 System.out.println("LINE: " + line);
                 String[] digit = line.split("");
-                if (mapLength == 0) {
-                    mapLength = digit.length;
+                if (mapXlength  == 0) {
+                	mapXlength  = digit.length;
                 }
                 for (int digitIdx = 0; digitIdx < digit.length; digitIdx++) {
-                    mapAsList.add(Integer.parseInt(digit[digitIdx]));
+                	digits.add(Integer.parseInt(digit[digitIdx]));
                 }
-                mapHeight++;
+                mapYlength++;
             }
-            System.out.println("LINE2: " + Arrays.toString(mapAsList.toArray()));
-            System.out.println("mapLength: " + mapLength);
-            System.out.println("mapHeight: " + mapHeight);
+            System.out.println("LINE2: " + Arrays.toString(digits.toArray()));
+            System.out.println("mapXlength: " + mapXlength);
+            System.out.println("mapYlength: " + mapYlength);
 
             //Process the indata
-
-
+            for (int listIdx = 0; listIdx < digits.size(); listIdx++) {
+                int currentDigit = digits.get(listIdx);
+                if (isLowestPoint(digits, currentDigit, mapXlength, mapYlength)) {
+                    riskLevelSum += currentDigit + 1;
+                }
+            }
             return riskLevelSum;
         } catch (FileNotFoundException e) {
             System.err.println("File not found: " + filePath);
@@ -58,5 +62,17 @@ public class RiskCalculator {
             e.printStackTrace();
         }
         return -1;
+    }
+
+    private static boolean isLowestPoint(ArrayList<Integer> digits, int currentDigit, int mapXlength, int mapYlength) {
+        int above = 0;
+        int below = 0;
+        int left = 0;
+        int right = 0;
+
+        return currentDigit < above
+            && currentDigit < below
+            && currentDigit < left
+            && currentDigit < right;
     }
 }
