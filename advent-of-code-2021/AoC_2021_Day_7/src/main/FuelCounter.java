@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.HashMap;
 
 /**
- * Represents a fish counter
+ * Represents a fuel counter
  * @author Hoa Truong
  *
  */
