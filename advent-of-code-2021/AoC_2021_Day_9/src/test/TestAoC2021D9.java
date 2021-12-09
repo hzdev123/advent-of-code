@@ -32,11 +32,11 @@ public class TestAoC2021D9 {
 
     @Test
     private static void testDay92Example(String filePath) {
-        assertEquals(1134, RiskCalculator.getSum(filePath));
+        assertEquals(1134, RiskCalculator.getBasinProduct(filePath));
     }
 
     @Test
     private static void testDay92Task(String filePath) {
-        assertEquals(-1, RiskCalculator.getSum(filePath));
+        assertEquals(-1, RiskCalculator.getBasinProduct(filePath));
     }
 }

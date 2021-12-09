@@ -16,6 +16,20 @@ import java.util.TreeMap;
  */
 public class RiskCalculator {
 
+    /**
+     * Gives the product of the three largest basin size
+     * @param filePath Path to input data file.
+     * @return int the product of the three largest basin size
+     */
+    public static int getBasinProduct(String filePath) {
+        int basinProduct = 0;
+        TreeMap<Integer, ArrayList<Integer>> lowPointMap = getLowPointMap(filePath);
+        ArrayList<Integer> digits = lowPointMap.get(lowPointMap.firstKey());
+        for (int lowPointMapIdx : lowPointMap.keySet()) {
+            int lowPointValue = digits.get(lowPointMapIdx);
+        }
+        return basinProduct;
+    }
 
     /**
      * Gives the sum of risk levels based on height map
@@ -24,14 +38,15 @@ public class RiskCalculator {
      */
     public static int getSum(String filePath) {
         int riskLevelSum = 0;
-        TreeMap<Integer, Integer> lowPointMap = getLowPointMap(filePath);
+        TreeMap<Integer, ArrayList<Integer>> lowPointMap = getLowPointMap(filePath);
+        ArrayList<Integer> digits = lowPointMap.get(lowPointMap.firstKey());
         for (int lowPointMapIdx : lowPointMap.keySet()) {
-            riskLevelSum += lowPointMap.get(lowPointMapIdx) + 1;
+            riskLevelSum += digits.get(lowPointMapIdx) + 1;
         }
         return riskLevelSum;
     }
 
-    private static TreeMap<Integer, Integer> getLowPointMap(String filePath) {
+    private static TreeMap<Integer, ArrayList<Integer>> getLowPointMap(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             //Setup the indata
             String line = "";
@@ -51,12 +66,12 @@ public class RiskCalculator {
 //            System.out.println("mapYlength: " + mapXlength + "\n");
 
             //Process the indata
-            TreeMap<Integer, Integer> lowPointMap = new TreeMap<Integer, Integer>();
+            TreeMap<Integer, ArrayList<Integer>> lowPointMap = new TreeMap<Integer, ArrayList<Integer>>();
             for (int listIdx = 0; listIdx < digits.size(); listIdx++) {
                 int currentDigit = digits.get(listIdx);
                 if (isLowPoint(digits, currentDigit, listIdx, mapXlength)) {
                     System.out.println("lowPoint[" + listIdx + "]: " + currentDigit + "\n");
-                    lowPointMap.put(listIdx, currentDigit);
+                    lowPointMap.put(listIdx, digits);
                 }
             }
             return lowPointMap;
