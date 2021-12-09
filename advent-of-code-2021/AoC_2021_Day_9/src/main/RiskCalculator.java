@@ -27,7 +27,6 @@ public class RiskCalculator {
     public static int getSum(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             //Setup the indata
-            int riskLevelSum = 0;
             String line = "";
             int mapXlength = 0;
             int mapYlength = 0;
@@ -44,14 +43,15 @@ public class RiskCalculator {
                 mapYlength++;
             }
 //            System.out.println("LINE2: " + Arrays.toString(digits.toArray()));
-//            System.out.println("mapXlength: " + mapXlength);
-//            System.out.println("mapYlength: " + mapYlength + "\n");
+            System.out.println("mapXlength: " + mapXlength);
+            System.out.println("mapYlength: " + mapYlength + "\n");
 
+            int riskLevelSum = 0;
             //Process the indata
             for (int listIdx = 0; listIdx < digits.size(); listIdx++) {
                 int currentDigit = digits.get(listIdx);
-                if (isLowPoint(digits, currentDigit, listIdx, mapXlength, mapYlength)) {
-                    System.out.println("lowPoint[" + listIdx+ "]: " + currentDigit + "\n");
+                if (isLowPoint(digits, currentDigit, listIdx, mapXlength)) {
+                    System.out.println("lowPoint[" + (listIdx + 1) + "]: " + currentDigit + "\n");
                     riskLevelSum += currentDigit + 1;
                 }
             }
@@ -107,7 +107,7 @@ public class RiskCalculator {
         }
     }
 
-    private static boolean isLowPoint(ArrayList<Integer> digits, int currentDigit, int listIdx, int mapXlength, int mapYlength) {
+    private static boolean isLowPoint(ArrayList<Integer> digits, int currentDigit, int listIdx, int mapXlength) {
         int above = getAboveDigit(digits, listIdx, mapXlength);
         int below = getBelowDigit(digits, listIdx, mapXlength);
         int left = getLeftDigit(digits, listIdx, mapXlength);
