@@ -16,19 +16,26 @@ import java.util.TreeMap;
  */
 public class RiskCalculator {
     private int mapXlength = -1;
+    private ArrayList<Integer> digits = null;
+    private TreeMap<Integer, Integer> lowPointMap = null;
+
+    public RiskCalculator() {
+        digits = new ArrayList<Integer>();
+        lowPointMap = new TreeMap<Integer, Integer>();
+    }
 
     /**
      * Gives the product of the three largest basin size
      * @param filePath Path to input data file.
      * @return int the product of the three largest basin size
      */
-    public static int getBasinProduct(String filePath) {
+    public int getBasinProduct(String filePath) {
         int basinProduct = 0;
-//        TreeMap<Integer, Integer> lowPointMap = getLowPointMap(filePath);
-//        for (int lowPointMapIdx : lowPointMap.keySet()) {
-//            int lowPointValue = digits.get(lowPointMapIdx);
-////            checkAdjacent(lowPointMapIdx, digits);
-//        }
+        TreeMap<Integer, Integer> lowPointMap = getLowPointMap(filePath);
+        System.out.println("mapXlength: " + mapXlength);
+        System.out.println("digits: " + Arrays.toString(digits.toArray()));
+        System.out.println("lowPointMap: " + Arrays.toString(lowPointMap.entrySet().toArray()));
+
         return basinProduct;
     }
 
@@ -37,7 +44,7 @@ public class RiskCalculator {
      * @param filePath Path to input data file.
      * @return int the sum of risk levels
      */
-    public static int getSum(String filePath) {
+    public int getSum(String filePath) {
         int riskLevelSum = 0;
         TreeMap<Integer, Integer> lowPointMap = getLowPointMap(filePath);
         for (int lowPointMapIdx : lowPointMap.keySet()) {
@@ -46,17 +53,18 @@ public class RiskCalculator {
         return riskLevelSum;
     }
 
-    private static TreeMap<Integer, Integer> getLowPointMap(String filePath) {
+    private TreeMap<Integer, Integer> getLowPointMap(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             //Setup the indata
             String line = "";
             int mapXlength = 0;
-            ArrayList<Integer> digits = new ArrayList<Integer>();
+            this.digits = new ArrayList<Integer>();
             while ((line = br.readLine()) != null) {
 //                System.out.println("LINE: " + line);
                 String[] digit = line.split("");
-                if (mapXlength  == 0) {
-                    mapXlength  = digit.length;
+                if (mapXlength == 0) {
+                    mapXlength = digit.length;
+                    this.mapXlength = digit.length;
                 }
                 for (int digitIdx = 0; digitIdx < digit.length; digitIdx++) {
                     digits.add(Integer.parseInt(digit[digitIdx]));
@@ -66,11 +74,11 @@ public class RiskCalculator {
 //            System.out.println("mapYlength: " + mapXlength + "\n");
 
             //Process the indata
-            TreeMap<Integer, Integer> lowPointMap = new TreeMap<Integer, Integer>();
+            this.lowPointMap = new TreeMap<Integer, Integer>();
             for (int listIdx = 0; listIdx < digits.size(); listIdx++) {
                 int currentDigit = digits.get(listIdx);
                 if (isLowPoint(digits, currentDigit, listIdx, mapXlength)) {
-                    System.out.println("lowPoint[" + listIdx + "]: " + currentDigit + "\n");
+//                    System.out.println("lowPoint[" + listIdx + "]: " + currentDigit + "\n");
                     lowPointMap.put(listIdx, currentDigit + 1);
                 }
             }
