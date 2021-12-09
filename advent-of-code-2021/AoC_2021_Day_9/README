@@ -15,9 +15,10 @@ Table of contents
 
 2. Summary:
     2.1 Day 9-1
-        Given a heightmap, find the risk level which is base on the low points.
+        Given a heightmap, find the risk level sum which is based on the low points.
 
     2.2 Day 9-2
+        Given a heightmap, find the product of the three largest basin size.
 
 3. Example:
     3.1 Day 9-1
@@ -38,6 +39,35 @@ Table of contents
         Ans: 2 + 1 + 6 + 6 = 15
 
     3.2 Day 9-2
+        The top-left basin, size 3:
+            2199943210
+            3987894921
+            9856789892
+            8767896789
+            9899965678
+
+        The top-right basin, size 9:
+            2199943210
+            3987894921
+            9856789892
+            8767896789
+            9899965678
+
+        The middle basin, size 14:
+            2199943210
+            3987894921
+            9856789892
+            8767896789
+            9899965678
+
+        The bottom-right basin, size 9:
+            2199943210
+            3987894921
+            9856789892
+            8767896789
+            9899965678
+
+        Ans: 9 * 14 * 9 = 1134
 
 4. Run the program
     cd AoC_2021_Day_9
