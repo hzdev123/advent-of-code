@@ -43,15 +43,15 @@ public class RiskCalculator {
                 mapYlength++;
             }
 //            System.out.println("LINE2: " + Arrays.toString(digits.toArray()));
-            System.out.println("mapXlength: " + mapXlength);
-            System.out.println("mapYlength: " + mapYlength + "\n");
+//            System.out.println("mapXlength: " + mapXlength);
+//            System.out.println("mapYlength: " + mapYlength + "\n");
 
             int riskLevelSum = 0;
             //Process the indata
             for (int listIdx = 0; listIdx < digits.size(); listIdx++) {
                 int currentDigit = digits.get(listIdx);
                 if (isLowPoint(digits, currentDigit, listIdx, mapXlength)) {
-                    System.out.println("lowPoint[" + (listIdx + 1) + "]: " + currentDigit + "\n");
+//                    System.out.println("lowPoint[" + (listIdx + 1) + "]: " + currentDigit + "\n");
                     riskLevelSum += currentDigit + 1;
                 }
             }
@@ -98,7 +98,7 @@ public class RiskCalculator {
 
     private static int getRightDigit(ArrayList<Integer> digits, int listIdx, int mapXlength) {
         if (listIdx < digits.size() - 1
-            && listIdx % mapXlength != 9) {
+            && listIdx % mapXlength != (mapXlength - 1)) {
 //            System.out.println("listIdx: " + listIdx);
 //            System.out.println("  Right digit: " + digits.get(listIdx + 1));
             return digits.get(listIdx + 1);
