@@ -14,9 +14,9 @@ public class Main {
         SyntaxChecker sc = new SyntaxChecker();
 
         System.out.println("Advent of code 2021 day 10-1 solved: "
-            + sc.getSyntaxErrorScoreSum(TASK_FILE_PATH));
+            + sc.getSyntaxErrorScoreSum(EXAMPLE_FILE_PATH));
         System.out.println("Advent of code 2021 day 10-2 solved: "
-            + sc.getSyntaxErrorScoreSum(TASK_FILE_PATH));
+            + sc.getIncompletesMiddleScore(EXAMPLE_FILE_PATH));
         System.exit(0);
     }
 }

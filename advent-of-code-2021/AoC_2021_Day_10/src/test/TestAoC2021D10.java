@@ -34,11 +34,11 @@ public class TestAoC2021D10 {
 
     @Test
     private static void testDay102Example(String filePath, SyntaxChecker sc) {
-        assertEquals(-1, sc.getSyntaxErrorScoreSum(filePath));
+        assertEquals(288957, sc.getIncompletesMiddleScore(filePath));
     }
 
     @Test
     private static void testDay102Task(String filePath, SyntaxChecker sc) {
-        assertEquals(-1, sc.getSyntaxErrorScoreSum(filePath));
+        assertEquals(-1, sc.getIncompletesMiddleScore(filePath));
     }
 }

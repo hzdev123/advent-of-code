@@ -26,8 +26,11 @@ public class SyntaxChecker {
     private Stack<String> stack = null;
 	private Set<String> openSet = null;
     private Set<String> closeSet = null;
-    private Map<String, Integer> errorScore = null;
+    private Map<String, Integer> errorMap= null;
     private Map<String, String> getOpen = null;
+    private List<String> incompleteLines = null;
+    private Map<String, Integer> incompleteMap = null;
+    private List<Integer> incompleteScores = null;
 
     public SyntaxChecker() {
         stack = new Stack<String>();
@@ -49,13 +52,52 @@ public class SyntaxChecker {
         getOpen.put("]", "[");
         getOpen.put(")", "(");
 //        System.out.println("getOpen: " + Arrays.toString(getOpen.entrySet().toArray()));
-        errorScore = new HashMap<String, Integer>();
-        errorScore.put(">", 25137);
-        errorScore.put("}", 1197);
-        errorScore.put("]", 57);
-        errorScore.put(")", 3);
-        System.out.println("errorScore: " + Arrays.toString(errorScore.entrySet().toArray()));
+        errorMap = new HashMap<String, Integer>();
+        errorMap.put(">", 25137);
+        errorMap.put("}", 1197);
+        errorMap.put("]", 57);
+        errorMap.put(")", 3);
+//        System.out.println("errorScore: " + Arrays.toString(errorScore.entrySet().toArray()));
+        incompleteLines = new ArrayList<String>();
+        incompleteMap= new HashMap<String, Integer>();
+        incompleteMap.put(">", 4);
+        incompleteMap.put("}", 3);
+        incompleteMap.put("]", 2);
+        incompleteMap.put(")", 1);
+//        System.out.println("incompleteScore: " + Arrays.toString(incompleteScore.entrySet().toArray()));
+        incompleteScores = new ArrayList<Integer>();
+
+
 }
+
+    /**
+     * Returns the incomplete lines middle score
+     * @param filePath Path to input data file.
+     * @return int the incomplete lines middle score
+     */
+    public int getIncompletesMiddleScore(String filePath) {
+//      System.out.println("incomplete lines: " + Arrays.toString(incompleteLines.toArray()));
+        for (int i = 0; i < incompleteLines.size(); i++) {
+//            System.out.println("incomplete line: " + incompleteLines.get(i));
+            incompleteScores.add(
+                getIncompleteScore(incompleteLines.get(i)));
+        }
+        System.out.println("incompleteScores: " + Arrays.toString(incompleteScores.toArray()));
+        return incompleteScores.get(incompleteScores.size()/2 + 1);
+    }
+
+    private int getIncompleteScore(String line) {
+        System.out.println("getIncompleteScore line: " + line);
+        int incompleteScore = 0;
+        String[] chars = line.split("");
+        for (int charIdx = 0; charIdx < chars.length; charIdx++) {
+            String currChar = chars[charIdx];
+
+            }
+        }
+//            incompleteScore += 5 * incompleteScore + incompleteMap.get(")");
+        return incompleteScore;
+    }
 
     /**
      * Returns the syntax error score
@@ -70,6 +112,7 @@ public class SyntaxChecker {
 //                System.out.println("LINE: " + line);
                 syntaxErrorScoreSum += getSyntaxErrorScore(line);
             }
+//            System.out.println("incomplete lines: " + Arrays.toString(incompleteLines.toArray()));
             return syntaxErrorScoreSum;
         } catch (FileNotFoundException e) {
             System.err.println("File not found: " + filePath);
@@ -84,8 +127,8 @@ public class SyntaxChecker {
 //        System.out.println("getSyntaxErrorScore line: " + line);
         String[] chars = line.split("");
 //        System.out.println("CHARS: " + Arrays.toString(chars));
-        for (int i = 0; i < chars.length; i++) {
-            String currChar = chars[i];
+        for (int charIdx = 0; charIdx < chars.length; charIdx++) {
+            String currChar = chars[charIdx];
 //            System.out.println("currChar: " + currChar);
             if (openSet.contains(currChar)) {
 //                System.out.println("openSet has: " + currChar);
@@ -97,10 +140,12 @@ public class SyntaxChecker {
 //                System.out.println("stack: " + Arrays.toString(stack.toArray()));
                 String stackTop = stack.pop();
                 if (!stackTop.equals(correctOpen)) {
-                    return errorScore.get(currChar);
+                    return errorMap.get(currChar);
                 }
             }
         }
+//        System.out.println("incomplete line: " + line);
+        incompleteLines.add(line);
         stack.setSize(0);
         return 0;
     }
