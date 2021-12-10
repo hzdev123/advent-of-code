@@ -18,6 +18,7 @@ Table of contents
         Given a set of closing characters, find the syntax error score.
 
     2.2 Day 10-2
+        Given a set of closing characters, find the middle score for the incomplete lines.
 
 3. Example:
     3.1 Day 10-1
@@ -34,10 +35,10 @@ Table of contents
             <{([{{}}[<[[[<>{}]]]>[]]
 
             {([(<{}[<>[]}>{[]{[(<()> - Expected ], but found } instead.
-            [[<[([]))<([[{}[[()]]] - Expected ], but found ) instead.
-            [{[{({}]{}}([{[{{{}}([] - Expected ), but found ] instead.
-            [<(<(<(<{}))><([]([]() - Expected >, but found ) instead.
-            <{([([[(<>()){}]>(<<{{ - Expected ], but found > instead.
+            [[<[([]))<([[{}[[()]]]   - Expected ], but found ) instead.
+            [{[{({}]{}}([{[{{{}}([]  - Expected ), but found ] instead.
+            [<(<(<(<{}))><([]([]()   - Expected >, but found ) instead.
+            <{([([[(<>()){}]>(<<{{   - Expected ], but found > instead.
 
             ): 3 points.
             ]: 57 points.
@@ -47,6 +48,35 @@ Table of contents
             2*3 + 57 + 1197 + 25137 = 26397
 
     3.2 Day 10-2
+            [({(<(())[]>[[{[]{<()<>>
+            [(()[<>])]({[<{<<[]>>(
+            {([(<{}[<>[]}>{[]{[(<()>
+            (((({<>}<{<{<>}{[]{[]{}
+            [[<[([]))<([[{}[[()]]]
+            [{[{({}]{}}([{[{{{}}([]
+            {<[[]]>}<{[{[{[]{()[[[]
+            [<(<(<(<{}))><([]([]()
+            <{([([[(<>()){}]>(<<{{
+            <{([{{}}[<[[[<>{}]]]>[]]
+
+            [({(<(())[]>[[{[]{<()<>> - Complete by adding }}]])})].
+            [(()[<>])]({[<{<<[]>>(   - Complete by adding )}>]}).
+            (((({<>}<{<{<>}{[]{[]{}  - Complete by adding }}>}>)))).
+            {<[[]]>}<{[{[{[]{()[[[]  - Complete by adding ]]}}]}]}>.
+            <{([{{}}[<[[[<>{}]]]>[]] - Complete by adding ])}>.
+
+            ): 1 point.
+            ]: 2 points.
+            }: 3 points.
+            >: 4 points.
+
+            ])}>      - 294 total points.
+            )}>]})    - 5566 total points.
+            }}]])})]  - 288957 total points.
+            ]]}}]}]}> - 995444 total points.
+            }}>}>)))) - 1480781 total points.
+
+            Ans: 288957
 
 4. Run the program
     cd AoC_2021_Day_10

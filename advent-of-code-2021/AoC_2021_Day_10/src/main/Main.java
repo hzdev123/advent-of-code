@@ -16,7 +16,7 @@ public class Main {
         System.out.println("Advent of code 2021 day 10-1 solved: "
             + sc.getSyntaxErrorScoreSum(TASK_FILE_PATH));
         System.out.println("Advent of code 2021 day 10-2 solved: "
-            + sc.getSyntaxErrorScoreSum(TASK_FILE_PATH));
+            + sc.getIncompletesMiddleScore(TASK_FILE_PATH));
         System.exit(0);
     }
 }
