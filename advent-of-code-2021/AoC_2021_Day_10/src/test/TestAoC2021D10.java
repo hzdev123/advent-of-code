@@ -3,7 +3,7 @@ package test;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import main.NumberCounter;
+import main.SyntaxChecker;
 
 public class TestAoC2021D10 {
 
@@ -22,21 +22,21 @@ public class TestAoC2021D10 {
 
     @Test
     private static void testDay101Example(String filePath) {
-        assertEquals(-1, NumberCounter.countUnique(filePath));
+        assertEquals(26397, SyntaxChecker.getSyntaxErrorScore(filePath));
     }
 
     @Test
     private static void testDay101Task(String filePath) {
-        assertEquals(-1, NumberCounter.countUnique(filePath));
+        assertEquals(-1, SyntaxChecker.getSyntaxErrorScore(filePath));
     }
 
     @Test
     private static void testDay102Example(String filePath) {
-        assertEquals(-1, NumberCounter.countOutputSum(filePath));
+        assertEquals(-1, SyntaxChecker.getSyntaxErrorScore(filePath));
     }
 
     @Test
     private static void testDay102Task(String filePath) {
-        assertEquals(-1, NumberCounter.countOutputSum(filePath));
+        assertEquals(-1, SyntaxChecker.getSyntaxErrorScore(filePath));
     }
 }

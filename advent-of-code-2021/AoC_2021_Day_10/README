@@ -15,11 +15,36 @@ Table of contents
 
 2. Summary:
     2.1 Day 10-1
+        Given a set of closing characters, find the syntax error score.
 
     2.2 Day 10-2
 
 3. Example:
     3.1 Day 10-1
+        Input:
+            [({(<(())[]>[[{[]{<()<>>
+            [(()[<>])]({[<{<<[]>>(
+            {([(<{}[<>[]}>{[]{[(<()>
+            (((({<>}<{<{<>}{[]{[]{}
+            [[<[([]))<([[{}[[()]]]
+            [{[{({}]{}}([{[{{{}}([]
+            {<[[]]>}<{[{[{[]{()[[[]
+            [<(<(<(<{}))><([]([]()
+            <{([([[(<>()){}]>(<<{{
+            <{([{{}}[<[[[<>{}]]]>[]]
+
+            {([(<{}[<>[]}>{[]{[(<()> - Expected ], but found } instead.
+            [[<[([]))<([[{}[[()]]] - Expected ], but found ) instead.
+            [{[{({}]{}}([{[{{{}}([] - Expected ), but found ] instead.
+            [<(<(<(<{}))><([]([]() - Expected >, but found ) instead.
+            <{([([[(<>()){}]>(<<{{ - Expected ], but found > instead.
+
+            ): 3 points.
+            ]: 57 points.
+            }: 1197 points.
+            >: 25137 points.
+
+            2*3 + 57 + 1197 + 25137 = 26397
 
     3.2 Day 10-2
 

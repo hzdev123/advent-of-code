@@ -12,9 +12,9 @@ public class Main {
         String TASK_FILE_PATH = "data/aoc_2021_day_10_data_task.txt";
 
         System.out.println("Advent of code 2021 day 10-1 solved: "
-            + NumberCounter.countUnique(TASK_FILE_PATH));
+            + SyntaxChecker.getSyntaxErrorScore(TASK_FILE_PATH));
         System.out.println("Advent of code 2021 day 10-2 solved: "
-            + NumberCounter.countOutputSum(TASK_FILE_PATH));
+            + SyntaxChecker.getSyntaxErrorScore(TASK_FILE_PATH));
         System.exit(0);
     }
 }
