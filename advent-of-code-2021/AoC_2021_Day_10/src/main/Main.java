@@ -11,10 +11,12 @@ public class Main {
         String EXAMPLE_FILE_PATH = "data/aoc_2021_day_10_data_example.txt";
         String TASK_FILE_PATH = "data/aoc_2021_day_10_data_task.txt";
 
+        SyntaxChecker sc = new SyntaxChecker();
+
         System.out.println("Advent of code 2021 day 10-1 solved: "
-            + SyntaxChecker.getSyntaxErrorScore(TASK_FILE_PATH));
+            + sc.getSyntaxErrorScoreSum(TASK_FILE_PATH));
         System.out.println("Advent of code 2021 day 10-2 solved: "
-            + SyntaxChecker.getSyntaxErrorScore(TASK_FILE_PATH));
+            + sc.getSyntaxErrorScoreSum(TASK_FILE_PATH));
         System.exit(0);
     }
 }
