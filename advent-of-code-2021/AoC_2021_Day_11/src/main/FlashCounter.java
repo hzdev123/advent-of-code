@@ -30,40 +30,37 @@ public class FlashCounter {
     }
 
     /**
-     * Get the number of flashes after n steps
-     * @param filePath Path to input data file.
-     */
-    public int getNbrOfFlashes(String filePath) {
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line = "";
-            while ((line = br.readLine()) != null) {
-//                System.out.println("LINE: " + line);
-                loadOctopuses(line);
-            }
-            for (int i = 0; i < 100; i++) {
-                System.out.println("Step: " + i);
-                simulateOctopusesFlashes();
-                printOctopuses();
-                flashedIdx.clear();
-            }
-            octopuses.clear();
-            return nbrfOfFlashes;
-        } catch (FileNotFoundException e) {
-            System.err.println("File not found: " + filePath);
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return -1;
-    }
-
-    /**
      * Resets the flash counter
      */
     public void reset() {
         nbrfOfFlashes = 0;
         octopuses.clear();
         flashedIdx.clear();
+    }
+
+    /**
+     * Get the iteration when all octopus entries are 0
+     * @param filePath Path to input data file.
+     * @return int the iteration when all octopus entries are 0
+     */
+    public int getSynchronizedFlashIteration(String filePath) {
+        return -1;
+    }
+
+    /**
+     * Get the number of flashes after n steps
+     * @param filePath Path to input data file.
+     */
+    public int getNbrOfFlashes(String filePath) {
+        loadOctopuses(filePath);
+        for (int i = 0; i < 100; i++) {
+            System.out.println("Step: " + i);
+            simulateOctopusesFlashes();
+//            printOctopuses();
+            flashedIdx.clear();
+        }
+        octopuses.clear();
+        return nbrfOfFlashes;
     }
 
     private void printOctopuses() {
@@ -84,13 +81,24 @@ public class FlashCounter {
         System.out.println("#: "+ nbrfOfFlashes + "\n");
     }
 
-    private void loadOctopuses(String line) {
-        String[] lineSplit = line.split("");
-        if (mapXlength == 0) {
-            mapXlength = lineSplit.length;
-        }
-        for (int i = 0; i < lineSplit.length; i++) {
-            octopuses.add(Integer.parseInt(lineSplit[i]));
+    private void loadOctopuses(String filePath) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line = "";
+            while ((line = br.readLine()) != null) {
+//                System.out.println("LINE: " + line);
+                String[] lineSplit = line.split("");
+                if (mapXlength == 0) {
+                    mapXlength = lineSplit.length;
+                }
+                for (int i = 0; i < lineSplit.length; i++) {
+                    octopuses.add(Integer.parseInt(lineSplit[i]));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found: " + filePath);
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

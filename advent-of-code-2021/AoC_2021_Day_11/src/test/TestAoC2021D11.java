@@ -37,11 +37,11 @@ public class TestAoC2021D11 {
 
     @Test
     private static void testDay112Example(String filePath, FlashCounter fc) {
-        assertEquals(-1, fc.getNbrOfFlashes((filePath)));
+        assertEquals(195, fc.getSynchronizedFlashIteration((filePath)));
     }
 
     @Test
     private static void testDay112Task(String filePath, FlashCounter fc) {
-        assertEquals(-1, fc.getNbrOfFlashes((filePath)));
+        assertEquals(-1, fc.getSynchronizedFlashIteration((filePath)));
     }
 }
