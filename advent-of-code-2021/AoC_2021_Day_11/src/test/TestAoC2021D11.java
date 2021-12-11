@@ -15,8 +15,11 @@ public class TestAoC2021D11 {
         FlashCounter fc = new FlashCounter();
 
         testDay111Example(EXAMPLE_FILE_PATH, fc);
+        fc.reset();
         testDay111Task(TASK_FILE_PATH, fc);
+        fc.reset();
         testDay112Example(EXAMPLE_FILE_PATH, fc);
+        fc.reset();
         testDay112Task(TASK_FILE_PATH, fc);
 
         System.out.println("Testing advent of code 2021 Day 11 done");
@@ -24,12 +27,12 @@ public class TestAoC2021D11 {
 
     @Test
     private static void testDay111Example(String filePath, FlashCounter fc) {
-        assertEquals(-1, fc.getNbrOfFlashes((filePath)));
+        assertEquals(1656, fc.getNbrOfFlashes((filePath)));
     }
 
     @Test
     private static void testDay111Task(String filePath, FlashCounter fc) {
-        assertEquals(-1, fc.getNbrOfFlashes((filePath)));
+        assertEquals(1571, fc.getNbrOfFlashes((filePath)));
     }
 
     @Test
