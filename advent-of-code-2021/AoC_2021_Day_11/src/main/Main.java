@@ -11,10 +11,12 @@ public class Main {
         String EXAMPLE_FILE_PATH = "data/aoc_2021_day_11_data_example.txt";
         String TASK_FILE_PATH = "data/aoc_2021_day_11_data_task.txt";
 
+        FlashCounter fc = new FlashCounter();
+
         System.out.println("Advent of code 2021 day 11-1 solved: "
-            + FlashCounter.getNbrOfFlashes(TASK_FILE_PATH, 100));
+            + fc.getNbrOfFlashes(TASK_FILE_PATH));
         System.out.println("Advent of code 2021 day 11-2 solved: "
-            + FlashCounter.getNbrOfFlashes(TASK_FILE_PATH, 100));
+            + fc.getNbrOfFlashes(TASK_FILE_PATH));
         System.exit(0);
     }
 }
