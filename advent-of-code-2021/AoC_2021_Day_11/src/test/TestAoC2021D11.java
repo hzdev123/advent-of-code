@@ -42,6 +42,6 @@ public class TestAoC2021D11 {
 
     @Test
     private static void testDay112Task(String filePath, FlashCounter fc) {
-        assertEquals(-1, fc.getSynchronizedFlashIteration((filePath)));
+        assertEquals(387, fc.getSynchronizedFlashIteration((filePath)));
     }
 }

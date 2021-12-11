@@ -44,7 +44,20 @@ public class FlashCounter {
      * @return int the iteration when all octopus entries are 0
      */
     public int getSynchronizedFlashIteration(String filePath) {
-        return -1;
+        loadOctopuses(filePath);
+        int iterations = 0;
+        while(true) {
+            if (!containsNonFlashing()) {
+                break;
+            }
+//            System.out.println("Step: " + iterations);
+            simulateOctopusesFlashes();
+//            printOctopuses();
+            flashedIdx.clear();
+            iterations++;
+        }
+        octopuses.clear();
+        return iterations;
     }
 
     /**
@@ -79,6 +92,18 @@ public class FlashCounter {
             }
         }
         System.out.println("#: "+ nbrfOfFlashes + "\n");
+    }
+
+    private boolean containsNonFlashing() {
+        return octopuses.contains(1)
+            || octopuses.contains(2)
+            || octopuses.contains(3)
+            || octopuses.contains(4)
+            || octopuses.contains(5)
+            || octopuses.contains(6)
+            || octopuses.contains(7)
+            || octopuses.contains(8)
+            || octopuses.contains(9);
     }
 
     private void loadOctopuses(String filePath) {

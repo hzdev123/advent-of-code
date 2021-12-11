@@ -13,8 +13,8 @@ public class Main {
 
         FlashCounter fc = new FlashCounter();
 
-        System.out.println("Advent of code 2021 day 11-1 solved: "
-            + fc.getNbrOfFlashes(TASK_FILE_PATH));
+//        System.out.println("Advent of code 2021 day 11-1 solved: "
+//            + fc.getNbrOfFlashes(TASK_FILE_PATH));
         System.out.println("Advent of code 2021 day 11-2 solved: "
             + fc.getSynchronizedFlashIteration(TASK_FILE_PATH));
         System.exit(0);
