@@ -11,10 +11,12 @@ public class Main {
         String EXAMPLE_FILE_PATH = "data/aoc_2021_day_12_data_example.txt";
         String TASK_FILE_PATH = "data/aoc_2021_day_12_data_task.txt";
 
+        PathFinder pf = new PathFinder();
+
         System.out.println("Advent of code 2021 day 12-1 solved: "
-            + rc.getSum(TASK_FILE_PATH));
-        System.out.println("Advent of code 2021 day 12-2 solved: "
-            + rc.getBasinProduct(TASK_FILE_PATH));
+            + pf.getNbrOfPaths(EXAMPLE_FILE_PATH));
+//        System.out.println("Advent of code 2021 day 12-2 solved: "
+//            + pf.getNbrOfPaths(TASK_FILE_PATH));
         System.exit(0);
     }
 }
