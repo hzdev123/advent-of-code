@@ -21,20 +21,40 @@ import java.util.TreeMap;
  *
  */
 public class PathFinder {
-    Map<String, List<String>> neighboursMap = null;
+    private Map<String, List<String>> neighboursMap = null;
+    private List<String> visitedNodes = null;
+    private List<String> paths = null;
 
     public PathFinder() {
         neighboursMap = new HashMap<String, List<String>>();
+        visitedNodes = new ArrayList<String>();
+        paths = new ArrayList<String>();
     }
-//	HaashMap
-//		K -> V: nodes -> neighbours
-//
-//		List<Path> distinctPaths
-//		
-//		List<VisiteedNodes>
-//		string currentNode
-//		string previousNode
-//	
+
+    /**
+     * Gives the number of distinct paths
+     * @param filePath Path to input data file.
+     * @return int the number of distinct paths
+     */
+    public int getNbrOfPaths(String filePath) {
+        loadNeighboursMap(filePath);
+        printNeighboursMap();
+        findPaths("start");
+        return -1;
+    }
+
+    private void findPaths(String node) {
+        System.out.println("node: " + node);
+        int i = 0;
+        for (String neighbour : neighboursMap.get(node)) {
+            i++;
+            System.out.println("    neighbour[" + i + "]: " + neighbour);
+            if (visitedNodes.contains(neighbour)) {
+	            visitedNodes.add(neighbour);
+	            findPaths(neighbour);
+            }
+        }
+    }
 //	    void visitNeighbour(currNode)
 //	    	getNeighBours
 //	    	for (neighbour : neighbours)
@@ -48,59 +68,6 @@ public class PathFinder {
 //	        	}
 //	        		
 //	        }	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-    /**
-     * Gives the product of the three largest basin size
-     * @param filePath Path to input data file.
-     * @return int the product of the three largest basin size
-     */
-    public int getNbrOfPaths(String filePath) {
-    	loadNeighboursMap(filePath);
-        printNeighboursMap();
-
-//        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-//            //Setup the indata
-//            String line = "";
-//            while ((line = br.readLine()) != null) {
-//                System.out.println("LINE: " + line);
-//                String[] split = line.split("-");
-//                String node = split[0];
-//                String neighbour = split[1];
-//                if (neighboursMap.containsKey(node)) {
-//                    List<String> neighbours = neighboursMap.get(node);
-//                    neighbours.add(neighbour);
-//                    neighboursMap.put(node, neighbours);
-//                } else {
-//                    List<String> neighbours = new ArrayList<String>();
-//                    neighbours.add(neighbour);
-//                    neighboursMap.put(node, neighbours);
-//                }
-//            }
-//            printNeighboursMap();
-//            return -1;
-//        } catch (FileNotFoundException e) {
-//            System.err.println("File not found: " + filePath);
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-        return -1;
-    }
 
     private void loadNeighboursMap(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
