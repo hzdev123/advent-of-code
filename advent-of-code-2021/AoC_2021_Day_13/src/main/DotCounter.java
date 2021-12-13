@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.HashSet;
 import java.util.TreeSet;
 
 /**
@@ -42,9 +43,9 @@ public class DotCounter {
      */
     public int countDots(String filePath) {
         loadDots(filePath);
-        //printDots();
+        printDots();
         dofoldings();
-        return -1;
+        return getUniqueDots();
     }
 
     private void dofoldings() {
@@ -73,26 +74,25 @@ public class DotCounter {
         int foldLineEndIdx = foldLine * (xMaxLength + 1) + xMaxLength + 1;
         loadXFoldLineIdxs(foldLine, foldLineStartIdx, foldLineEndIdx);
         printDots();
-        foldDotsUp(foldLine, foldLineStartIdx, foldLineEndIdx);
-        //        printFoldedUp(foldLine * (xMaxLength + 1));
-        //        printDots();
-
-//        foldCmds.clear();
-//        yMaxLength = yMaxLength/2;
+        foldDotsUp(foldLine);
     }
 
-    private void foldDotsUp(int foldLine, int foldLineStartIdx, int foldLineEndIdx) {
+    private int getUniqueDots() {
+        Set<Integer> dots = new HashSet<Integer>(dotsIdxs);
+        dots.addAll(newDotsIdxs);
+        return dots.size();
+    }
+
+    private void foldDotsUp(int foldLine) {
         int bottomHalfIdx = foldLine * (xMaxLength + 1) + xMaxLength + 2;
         int endIdx = (xMaxLength + 1) * (yMaxLength + 1);
         for (int mapIdx = bottomHalfIdx; mapIdx < endIdx; mapIdx++) {
             if (dotsIdxs.contains(mapIdx)) {
                 int dotIdxIdx = dotsIdxs.indexOf(mapIdx);
                 int dotIdx = dotsIdxs.get(dotIdxIdx);
-
-                int newDotIdx = getNewDotIdx(dotIdx, foldLineStartIdx, foldLineEndIdx);
+                int newDotIdx = getNewDotIdx(dotIdx, foldLine);
                 newDotsIdxs.add(newDotIdx);
                 dotsIdxs.remove(dotIdxIdx);
-
                 System.out.println("dotIdx " + dotIdx + ": transforms to " + newDotIdx);
             }
         }
@@ -100,11 +100,15 @@ public class DotCounter {
         printFoldedUp(foldLine * (xMaxLength + 1));
     }
 
-    //TODO:get correct x index
-    private int getNewDotIdx(int dotIdx, int foldLineStartIdx, int foldLineEndIdx) {
+    private int getNewDotIdx(int dotIdx, int foldLine) {
         System.out.println("  getNewDotIdx: " + dotIdx);
-        int dotIdxToFoldLineEnd = dotIdx - foldLineEndIdx;
-        int newDotIdx = foldLineStartIdx - dotIdxToFoldLineEnd; //TODO: here
+        int newDotIdxX = dotIdx % (xMaxLength + 1);
+        int currentDotIdxY = dotIdx / (xMaxLength + 1);
+        int dotIdxYDiff = currentDotIdxY - foldLine;
+        int newDotIdxY = foldLine - dotIdxYDiff;
+        int newDotIdx = xyToDotsIdx(newDotIdxX, newDotIdxY);
+        System.out.println("  getNewDotIdxX[" + dotIdx + "]: " + newDotIdxX);
+        System.out.println("  getNewDotIdxY[" + dotIdx + "]: " + newDotIdxY);
         System.out.println("  getNewDotIdx[" + dotIdx + "]: " + newDotIdx);
         return newDotIdx;
     }
