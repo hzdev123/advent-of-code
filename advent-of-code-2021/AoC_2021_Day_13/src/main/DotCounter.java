@@ -24,11 +24,15 @@ public class DotCounter {
     private int xMaxLength = 0;
     private int yMaxLength = 0;
     private List<Integer> dotsIdxs = null;
+    private List<Integer> newDotsIdxs = null;
     private List<String> foldCmds = null;
+    private List<Integer> foldLineIdxs = null;
 
     public DotCounter() {
         dotsIdxs = new ArrayList<Integer>();
+        newDotsIdxs = new ArrayList<Integer>();
         foldCmds = new ArrayList<String>();
+        foldLineIdxs = new ArrayList<Integer>();
     }
 
     /**
@@ -38,9 +42,8 @@ public class DotCounter {
      */
     public int countDots(String filePath) {
         loadDots(filePath);
-        printDots();
+        //printDots();
         dofoldings();
-        printDots();
         return -1;
     }
 
@@ -48,22 +51,85 @@ public class DotCounter {
         for (int i = 0; i < 1; i++) {
             String foldCmd = foldCmds.get(i);
             System.out.println("fold[" + i + "]: " + foldCmd);
-            int steps = Integer.parseInt(foldCmd.split("=")[1]);
-            System.out.println("fold[" + i + "]: " + steps);
-            if (foldCmd.contains("y")) {    //fold up
-                foldUp(steps);
-            } else {                           // fold left
-                foldLeft(steps);
+            int foldLine = Integer.parseInt(foldCmd.split("=")[1]);
+            System.out.println("fold[" + i + "]: " + foldLine);
+            if (foldCmd.contains("y=")) {    //fold up
+                foldUp(foldLine);
+            } else {                         // fold left
+                foldLeft(foldLine);
             }
         }
     }
 
-    private void foldUp(int steps) {
-        System.out.println("foldUp: " + steps);
+    private void loadXFoldLineIdxs(int foldLine, int foldLineStartIdx, int foldLineEndIdx) {
+        for (int i = foldLineStartIdx; i < foldLineEndIdx; i++) {
+            foldLineIdxs.add(i);
+        }
     }
 
-    private void foldLeft(int steps) {
-        System.out.println("foldLeft: " + steps);
+    private void foldUp(int foldLine) {
+        System.out.println("foldUp: " + foldLine);
+        int foldLineStartIdx = foldLine * (xMaxLength + 1);
+        int foldLineEndIdx = foldLine * (xMaxLength + 1) + xMaxLength + 1;
+        loadXFoldLineIdxs(foldLine, foldLineStartIdx, foldLineEndIdx);
+        printDots();
+        foldDotsUp(foldLine, foldLineStartIdx, foldLineEndIdx);
+        //        printFoldedUp(foldLine * (xMaxLength + 1));
+        //        printDots();
+
+//        foldCmds.clear();
+//        yMaxLength = yMaxLength/2;
+    }
+
+    private void foldDotsUp(int foldLine, int foldLineStartIdx, int foldLineEndIdx) {
+        int bottomHalfIdx = foldLine * (xMaxLength + 1) + xMaxLength + 2;
+        int endIdx = (xMaxLength + 1) * (yMaxLength + 1);
+        for (int mapIdx = bottomHalfIdx; mapIdx < endIdx; mapIdx++) {
+            if (dotsIdxs.contains(mapIdx)) {
+                int dotIdxIdx = dotsIdxs.indexOf(mapIdx);
+                int dotIdx = dotsIdxs.get(dotIdxIdx);
+
+                int newDotIdx = getNewDotIdx(dotIdx, foldLineStartIdx, foldLineEndIdx);
+                newDotsIdxs.add(newDotIdx);
+                dotsIdxs.remove(dotIdxIdx);
+
+                System.out.println("dotIdx " + dotIdx + ": transforms to " + newDotIdx);
+            }
+        }
+        Collections.sort(newDotsIdxs);
+        printFoldedUp(foldLine * (xMaxLength + 1));
+    }
+
+    //TODO:get correct x index
+    private int getNewDotIdx(int dotIdx, int foldLineStartIdx, int foldLineEndIdx) {
+        System.out.println("  getNewDotIdx: " + dotIdx);
+        int dotIdxToFoldLineEnd = dotIdx - foldLineEndIdx;
+        int newDotIdx = foldLineStartIdx - dotIdxToFoldLineEnd; //TODO: here
+        System.out.println("  getNewDotIdx[" + dotIdx + "]: " + newDotIdx);
+        return newDotIdx;
+    }
+
+    private void printFoldedUp(int endIdx) {
+        System.out.println("printFoldedUp: " + endIdx);
+        int x = 0;
+        for (int i = 0; i < endIdx; i++) {
+            x++;
+            if (dotsIdxs.contains(i)) {
+                System.out.print("#");
+            } else if (newDotsIdxs.contains(i)) {
+                System.out.print("x");
+            } else {
+                System.out.print(".");
+            }
+            if (x == xMaxLength + 1) {
+                System.out.println("");
+                x = 0;
+            }
+        }
+    }
+
+    private void foldLeft(int foldLine) {
+        System.out.println("foldLeft: " + foldLine);
     }
 
     private void loadDots(String filePath) {
@@ -95,10 +161,12 @@ public class DotCounter {
     }
 
     private void printDots() {
-    	int x = 0;
+        int x = 0;
         for (int i = 0; i < (xMaxLength + 1) * (yMaxLength + 1); i++) {
             x++;
-            if (dotsIdxs.contains(i)) {
+            if (foldLineIdxs.contains(i)) {
+                System.out.print("-");
+            } else if (dotsIdxs.contains(i)) {
                 System.out.print("#");
             } else {
                 System.out.print(".");
