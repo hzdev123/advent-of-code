@@ -24,9 +24,11 @@ public class DotCounter {
     private int xMaxLength = 0;
     private int yMaxLength = 0;
     private List<Integer> dotsIdxs = null;
+    private List<String> foldCmds = null;
 
     public DotCounter() {
-    	dotsIdxs = new ArrayList<Integer>();
+        dotsIdxs = new ArrayList<Integer>();
+        foldCmds = new ArrayList<String>();
     }
 
     /**
@@ -37,7 +39,31 @@ public class DotCounter {
     public int countDots(String filePath) {
         loadDots(filePath);
         printDots();
+        dofoldings();
+        printDots();
         return -1;
+    }
+
+    private void dofoldings() {
+        for (int i = 0; i < 1; i++) {
+            String foldCmd = foldCmds.get(i);
+            System.out.println("fold[" + i + "]: " + foldCmd);
+            int steps = Integer.parseInt(foldCmd.split("=")[1]);
+            System.out.println("fold[" + i + "]: " + steps);
+            if (foldCmd.contains("y")) {    //fold up
+                foldUp(steps);
+            } else {                           // fold left
+                foldLeft(steps);
+            }
+        }
+    }
+
+    private void foldUp(int steps) {
+        System.out.println("foldUp: " + steps);
+    }
+
+    private void foldLeft(int steps) {
+        System.out.println("foldLeft: " + steps);
     }
 
     private void loadDots(String filePath) {
@@ -52,10 +78,14 @@ public class DotCounter {
                     int y = Integer.parseInt(coordinates[1]);
                     int dotIdx = xyToDotsIdx(x,y);
                     dotsIdxs.add(dotIdx);
+                } else if (line.contains("fold along")) {
+                    String[] foldLine = line.split(" ");
+                    foldCmds.add(foldLine[2]);
                 }
             }
             Collections.sort(dotsIdxs);
             System.out.println("dotsIdxs: " + Arrays.toString(dotsIdxs.toArray()));
+            System.out.println("foldCmds: " + Arrays.toString(foldCmds.toArray()));
         } catch (FileNotFoundException e) {
             System.err.println("File not found: " + filePath);
             e.printStackTrace();
